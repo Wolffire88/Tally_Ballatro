@@ -1,0 +1,14 @@
+{
+    "id": "tally_ballatro",
+    "name": "Tally Ballatro",
+    "display_name": "Tally Ballatro",
+    "author": ["Wolffire25"],
+    "description": "Tally Ballatro, a Balatro mod all about everyone's favorite band, Tally Hall!",
+    "prefix": "tb",
+    "main_file": "TallyBallatro.lua",
+    "priority": 0,
+    "badge_colour": "6a329f",
+    "badge_text_colour": "",
+    "version": "0.0.1",
+    "dependencies": ["Steamodded (>=1.0.0~BETA-0614a)"]
+}
