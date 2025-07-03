@@ -32,7 +32,7 @@ SMODS.Enhancement {
         y = 0
     },
     unlocked = true,
-    discovered = true,
+    discovered = false,
     replace_base_card = false,
     atlas = "mechanical",
 
@@ -65,7 +65,7 @@ SMODS.Edition {
     extra_cost = 4,
     weight = 4,
     unlocked = true,
-    discovered = true,
+    discovered = false,
     in_shop = true,
     sound = { sound = "holo1", per = 1.5, vol = 0.4 },
 
@@ -111,7 +111,7 @@ SMODS.Consumable {
         y = 0
     },
     unlocked = true,
-    discovered = true,
+    discovered = false,
     atlas = "cog",
 
     loc_vars = function(self, info_queue, card)
@@ -129,7 +129,7 @@ SMODS.Consumable {
         y = 0
     },
     unlocked = true,
-    discovered = true,
+    discovered = false,
     atlas = "ego",
 
     loc_vars = function(self, info_queue, card)
