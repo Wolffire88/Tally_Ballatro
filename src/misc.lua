@@ -1,4 +1,11 @@
 SMODS.Atlas {
+    key = "modicon",
+    path = "tb_logo.png",
+    px = 32,
+    py = 32
+}
+
+SMODS.Atlas {
     key = "mechanical",
     path = "mechanical.png",
     px = 71,
