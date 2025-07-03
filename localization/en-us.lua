@@ -352,6 +352,10 @@ return {
             k_hiatus = "On Hiatus!",
             k_left_ex = "Left the band!",
             k_zirconium = "Zirconium!"
+        },
+
+        labels = {
+            tb_zirconium = "Zirconium"
         }
     }
 }
