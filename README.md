@@ -3,7 +3,7 @@
 A Balatro mod about everyone's favorite band, Tally Hall!
 
 ## Content:
-This mod adds:\
+This mod adds:
 - 30 new jokers!
 - A new edition and enhancement
 - A new spectral card
