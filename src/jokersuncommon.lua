@@ -551,7 +551,12 @@ SMODS.Joker {
             local all_zirc = true
 
             for _, pcard in ipairs(context.scoring_hand) do
-                if not pcard.edition and not pcard.edition.tb_zirconium then
+                if pcard.edition then
+                    if not pcard.edition.tb_zirconium then
+                        all_zirc = false
+                        break
+                    end
+                else
                     all_zirc = false
                     break
                 end
