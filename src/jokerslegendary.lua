@@ -218,7 +218,9 @@ SMODS.Joker {
             end
 
 
-            add_tag(tag_to_add)
+            if tag_to_add then
+                add_tag(tag_to_add)
+            end
         end
     end
 }
