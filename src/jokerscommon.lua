@@ -302,7 +302,7 @@ SMODS.Joker{
 
 SMODS.Joker {
     key = "zirconiumpants",
-    config = { extra = { odds = 2, poker_hand = "Pair" } },
+    config = { extra = { odds = 3, poker_hand = "Pair" } },
     pos = {
         x = 4,
         y = 0
