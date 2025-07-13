@@ -566,6 +566,13 @@ SMODS.Joker {
                     end
                 }))
             end
+
+            if unscored then
+                return {
+                    message = localize('k_zirconium'),
+                    coloug = G.C.FILTER
+                }
+            end
         end
     end
 }
