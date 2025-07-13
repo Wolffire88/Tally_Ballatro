@@ -344,7 +344,7 @@ SMODS.Joker {
             if all_zirc then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
-                    delay = '0.3',
+                    delay = 0.3,
                     func = function()
                         trance_card = SMODS.add_card({
                             set = 'Spectral',
