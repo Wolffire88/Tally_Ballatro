@@ -80,8 +80,9 @@ return {
             j_tb_zirconiumpants = {
                 name = "Zirconium Pants",
                 text = {
-                    "{C:green}#1# in #2#{} chance to generate the {C:spectral}Trance{}",
-                    "spectral card if played hand is a pair of {C:dark_edition}zirconium{} cards"
+                    "{C:green}#1# in #2#{} chance to generate",
+                    "the {C:spectral}Trance{} spectral card if played",
+                    "hand is a pair of {C:dark_edition}zirconium{} cards"
                 }
             },
 
