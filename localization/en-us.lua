@@ -82,7 +82,8 @@ return {
                 text = {
                     "{C:green}#1# in #2#{} chance to generate",
                     "the {C:spectral}Trance{} spectral card if played",
-                    "hand is a pair of {C:dark_edition}zirconium{} cards"
+                    "hand is a pair of {C:dark_edition}zirconium{} cards",
+                    "{C:inactive}(Must have room){}"
                 }
             },
 
@@ -351,7 +352,8 @@ return {
             -- misc
             k_hiatus = "On Hiatus!",
             k_left_ex = "Left the band!",
-            k_trance = "Put in a trance"
+            k_trance = "Put in a trance",
+            k_zirconium = "Zirconium!"
         },
 
         labels = {
