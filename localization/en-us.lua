@@ -80,8 +80,8 @@ return {
             j_tb_zirconiumpants = {
                 name = "Zirconium Pants",
                 text = {
-                    "{C:green}#1# in #2#{} chance to convert all {C:attention}unscored{}",
-                    "cards to {C:dark_edition}zirconium{} if played hand is a {C:attention}#3#{}"
+                    "{C:green}#1# in #2#{} chance to generate the {C:spectral}Trance{}",
+                    "spectral card if played hand is a pair of {C:dark_edition}zirconium{} cards"
                 }
             },
 
@@ -351,7 +351,7 @@ return {
             -- misc
             k_hiatus = "On Hiatus!",
             k_left_ex = "Left the band!",
-            k_zirconium = "Zirconium!"
+            k_trance = "Put in a trance"
         },
 
         labels = {

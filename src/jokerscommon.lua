@@ -302,7 +302,7 @@ SMODS.Joker{
 
 SMODS.Joker {
     key = "zirconiumpants",
-    config = { extra = { odds = 6, poker_hand = "Pair" } },
+    config = { extra = { odds = 2, poker_hand = "Pair" } },
     pos = {
         x = 4,
         y = 0
@@ -319,6 +319,7 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card) 
         info_queue[#info_queue + 1] = G.P_CENTERS.e_tb_zirconium
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_trance
         return { vars = { G.GAME and G.GAME.probabilities.normal or 1, card.ability.extra.odds, card.ability.extra.poker_hand } }
     end,
 
@@ -327,29 +328,32 @@ SMODS.Joker {
 
         if context.before and context.scoring_name == card.ability.extra.poker_hand and 
             pseudorandom('likehowidance') < G.GAME.probabilities.normal/card.ability.extra.odds then
-            local only_unscored = {}
-            for _, pcard in ipairs(G.play.cards) do
-                if not is_in_table(context.scoring_hand, pcard) then
-                    table.insert(only_unscored, pcard)
+            local all_zirc = true
+            for _, pcard in ipairs(context.scoring_hand) do
+                if pcard.edition then
+                    if not pcard.edition.tb_zirconium then
+                        all_zirc = false
+                        break
+                    end
+                else
+                    all_zirc = false
+                    break
                 end
             end
 
-            for _, unscored in ipairs(only_unscored) do
+            if all_zirc then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
-                    delay = 0.4,
+                    delay = '0.3',
                     func = function()
-                        unscored:set_edition("e_tb_zirconium", true)
+                        trance_card = SMODS.add_card({
+                            set = 'Spectral',
+                            key = 'c_trance'
+                        })
+                        card:juice_up()
                         return true
                     end
                 }))
-            end
-
-            if only_unscored then
-                return {
-                    message = localize('k_zirconium'),
-                    colour = G.C.FILTER
-                }
             end
         end
     end
