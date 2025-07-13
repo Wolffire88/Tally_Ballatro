@@ -548,37 +548,23 @@ SMODS.Joker {
 
         -- Placeholder
         if context.joker_main and G.GAME.probabilities.normal/card.ability.extra.odds then
-            local all_zirc = true
+            local unscored = {}
 
-            for _, pcard in ipairs(context.scoring_hand) do
-                if pcard.edition then
-                    if not pcard.edition.tb_zirconium then
-                        all_zirc = false
-                        break
-                    end
-                else
-                    all_zirc = false
-                    break
+            for _, pcard in ipairs(G.PLAY.hand) do
+                if not is_in_table(context.scoring_hand, pcard) then
+                    table.insert(unscored, pcard)
                 end
             end
 
-            if all_zirc and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            for _, us_card in iparis(unscored) do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.3,
                     func = function()
-                        SMODS.create_card({
-                            set = 'Spectral'
-                        })
-                        card:juice_up()
+                        us_card:set_edition("e_tb_zirconium", true)
                         return true
                     end
                 }))
-                
-                return {
-                    message = localize('k_tarot')
-                }
             end
         end
     end

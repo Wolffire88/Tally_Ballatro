@@ -208,8 +208,7 @@ return {
             j_tb_rulerofeverything = {
                 name = "The Ruler of Everything",
                 text = {
-                    "{C:green}#1# in #2# chance{} to generate a {C:spectral}spectral{}",
-                    "card if hand contains all {C:dark_edition}zirconium{} cards."
+                    "All unscored cards become {C:dark_edition}zirconium{}."
                 }
             },
 
