@@ -341,7 +341,8 @@ SMODS.Joker {
                 end
             end
 
-            if all_zirc then
+            if all_zirc and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.3,
@@ -351,9 +352,15 @@ SMODS.Joker {
                             key = 'c_trance'
                         })
                         card:juice_up()
+                        G.GAME.consumeable_buffer = 0
                         return true
                     end
                 }))
+
+                return {
+                    message = localize('k_trance'),
+                    colour = G.C.BLUE
+                }
             end
         end
     end
