@@ -32,6 +32,10 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     lazy_texture.r = lazy_texture.r * 0.98;
     lazy_texture.g = lazy_texture.g * 1.2 + (0.001 * zirconium.x);
     lazy_texture.b = lazy_texture.b * 1.5 + (0.01 * zirconium.y);
+
+    if (tex.a < 0.1) {
+        lazy_texture.a = 0.0;
+    }
     
     // required
     return dissolve_mask(lazy_texture*colour, texture_coords, uv);
