@@ -68,7 +68,7 @@ SMODS.Enhancement {
 SMODS.Edition {
     key = "zirconium",
     shader = "zirconium",
-    config = { extra = { x_chips = 1.5 } },
+    config = { x_chips = 1.5 },
     extra_cost = 4,
     weight = 4,
     unlocked = true,
@@ -77,7 +77,7 @@ SMODS.Edition {
     sound = { sound = "holo1", per = 1.5, vol = 0.4 },
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.edition.extra.x_chips } }
+        return { vars = { card.edition.x_chips } }
     end,
 
     get_weight = function(self)
@@ -87,9 +87,9 @@ SMODS.Edition {
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        if context.main_scoring and context.cardarea == G.play then
+        if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
             return {
-                xchips = card.edition.extra.x_chips
+                x_chips = card.edition.x_chips
             }
         end
     end,
