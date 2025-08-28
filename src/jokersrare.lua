@@ -284,7 +284,7 @@ SMODS.Joker {
     calculate = function(self, card, context) 
         if card.debuff then return nil end
 
-        if context.end_of_round and not context.blueprint and context.other_card == card then
+        if context.end_of_round and context.game_over == false and not context.blueprint and context.main_eval then
             if pseudorandom("definitely_legendary") < G.GAME.probabilities.normal/card.ability.extra.odds then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
