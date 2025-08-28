@@ -454,7 +454,7 @@ SMODS.Joker {
                     delay = 0.3,
                     blockable = false,
                     func = function()
-                        rand_card:start_dissolve()
+                        SMODS.destroy_cards(rand_card, nil, true)
                         return true
                     end
                 }))
