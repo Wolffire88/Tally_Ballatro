@@ -550,13 +550,13 @@ SMODS.Joker {
         if context.joker_main and G.GAME.probabilities.normal/card.ability.extra.odds then
             local unscored = {}
 
-            for _, pcard in ipairs(G.PLAY.hand) do
+            for _, pcard in ipairs(context.full_hand) do
                 if not is_in_table(context.scoring_hand, pcard) then
                     table.insert(unscored, pcard)
                 end
             end
 
-            for _, us_card in iparis(unscored) do
+            for _, us_card in ipairs(unscored) do
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.3,
