@@ -191,8 +191,8 @@ return {
             j_tb_hiddeninthesand = {
                 name = "Hidden in the Sand",
                 text = {
-                    "Destroy {C:attention}1{} random card in hand and add double",
-                    "its {C:attention}rank{} to this joker's mult {C:inactive}(currently {C:mult}+#1#{C:inactive}){}",
+                    "Destroy {C:attention}1{} random card in hand and add its",
+                    "{C:attention}rank{} to this joker's mult {C:inactive}(currently {C:mult}+#1#{C:inactive}){}",
                     "{C:inactive}(Aces count as {C:attention}1{C:inactive}, face cards count as {C:attention}10{C:inactive}){}"
                 }
             },

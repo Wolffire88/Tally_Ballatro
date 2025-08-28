@@ -447,7 +447,7 @@ SMODS.Joker {
             local rand_card = pseudorandom_element(G.hand.cards, 'HITS')
 
             if not rand_card.debuff then
-                card.ability.extra.mult = card.ability.extra.mult + 2 * id_to_rank(rand_card:get_id())
+                card.ability.extra.mult = card.ability.extra.mult + id_to_rank(rand_card:get_id())
 
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
