@@ -446,6 +446,8 @@ SMODS.Joker {
         if context.before and not context.blueprint then
             local rand_card = pseudorandom_element(G.hand.cards, 'HITS')
 
+            if not rand_card or SMODS.has_no_rank(rand_card) then return end
+
             if not rand_card.debuff then
                 card.ability.extra.mult = card.ability.extra.mult + id_to_rank(rand_card:get_id())
 
