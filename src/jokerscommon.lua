@@ -1,69 +1,69 @@
 SMODS.Atlas({
     key = "joehawleyjoehawley",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "purpletie",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "englishchap",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "spaghettibathtub",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "zirconiumpants",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "naturalketchup",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "cloudvariations",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "notatrampoline",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "goodandevil",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "missmelody",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })

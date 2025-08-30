@@ -1,34 +1,34 @@
 SMODS.Atlas({
     key = "hawley",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "horowitz",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "seghisi",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "federman",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "cantor",
-    path = "THJokers.png",
+    path = sprite_path,
     px = 71,
     py = 95
 })

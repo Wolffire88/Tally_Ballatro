@@ -1,8 +1,11 @@
--- "{C:money} money{}, {C:chips} chips{}, {C:mult} mult{}, {C:red} red{}, {C:blue} blue{}, {C:green} green{}",
--- "{C:attention} attention{}, {C:purple} purple{}, {C:inactive} inactive{}",
--- "{C:spades} spades{}, {C:hearts} hearts{}, {C:clubs} clubs{}, {C:diamonds} diamonds{}",
--- "{C:tarot} tarot{}, {C:planet} planet{}, {C:spectral} spectral{}",
--- "{C:edition} edition{}, {C:dark_edition} dark edition{}, {C:legendary} legendary{}, {C:enhanced} enhanced{}",
+-- Sprite sheet logic, Jokers As Neco Arc compatibality
+sprite_path = ""
+local neco = next(SMODS.find_mod("JokersAsNecoArc"))
+if neco then
+    sprite_path = "NecoHall.png"
+else
+    sprite_path = "THJokers.png"
+end
 
 -- Jokers
 assert(SMODS.load_file("src/jokerscommon.lua"))()
