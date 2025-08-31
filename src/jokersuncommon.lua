@@ -296,30 +296,32 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        if context.before then
+        if not context.blueprint then
             local num_queens = 0
-            for _, pcard in ipairs(context.scoring_hand) do
-                if not pcard.debuff and pcard:get_id() == 12 then
-                    num_queens = num_queens + 1
+            if context.before then
+                for _, pcard in ipairs(context.scoring_hand) do
+                    if not pcard.debuff and pcard:get_id() == 12 then
+                        num_queens = num_queens + 1
+                    end
                 end
-            end
 
-            if num_queens > 0 then
-                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase * num_queens
+                if num_queens > 0 then
+                    card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase * num_queens
 
-                return {
-                    message = localize('k_upgrade_ex'),
-                    message_card = card,
-                    colour = G.C.FILTER
-                }
-            end
-        end 
+                    return {
+                        message = localize('k_upgrade_ex'),
+                        message_card = card,
+                        colour = G.C.FILTER
+                    }
+                end
+            end 
 
-        if context.destroy_card and context.cardarea == G.play and not context.blueprint then
-            if context.destroy_card:get_id() == 12 and not context.destroy_card.debuff then
-                return {
-                    remove = true
-                } 
+            if context.destroy_card and context.cardarea == G.play then
+                if context.destroy_card:get_id() == 12 and not context.destroy_card.debuff then
+                    return {
+                        remove = true
+                    } 
+                end
             end
         end
 
