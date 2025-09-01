@@ -1,5 +1,5 @@
 SMODS.Atlas({
-    key = "miraclemusical",
+    key = "hawaiitwo",
     path = sprite_path,
     px = 71,
     py = 95
@@ -35,36 +35,56 @@ SMODS.Atlas({
 
 
 SMODS.Joker {
-    key = "miraclemusical",
-    config = { extra = { xmult = 1, xmult_increase = 0.25, retriggers = 1 } },
+    key = "hawaiitwo",
+    config = { extra = { xmult = 1, xmult_increase = 0.5 } },
     pos = {
-        x = 6,
+        x = 0,
         y = 2
     },
-    rarity = 3,
-    cost = 7,
+    rarity = 2,
+    cost = 6,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "miraclemusical",
+    atlas = "hawaiitwo",
 
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = G.P_CENTERS.e_polychrome
-        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_increase } }
+        return { vars = { card.ability.extra.xmult_increase, card.ability.extra.xmult } }
     end,
-    
+
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        if context.repetition and context.other_card.edition and context.other_card.edition.polychrome and not context.other_card.debuff then
-            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase
+        if not context.blueprint then
+            local num_queens = 0
+            if context.before then
+                for _, pcard in ipairs(context.scoring_hand) do
+                    if not pcard.debuff and pcard:get_id() == 12 then
+                        num_queens = num_queens + 1
+                    end
+                end
 
-            return {
-                repetitions = card.ability.extra.retriggers
-            }
+                if num_queens > 0 then
+                    card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase * num_queens
+
+                    return {
+                        message = localize('k_upgrade_ex'),
+                        message_card = card,
+                        colour = G.C.FILTER
+                    }
+                end
+            end 
+
+            if context.destroy_card and context.cardarea == G.play then
+                if context.destroy_card:get_id() == 12 and not context.destroy_card.debuff then
+                    return {
+                        remove = true
+                    } 
+                end
+            end
         end
 
         if context.joker_main then
@@ -74,6 +94,7 @@ SMODS.Joker {
         end
     end
 }
+
 
 SMODS.Joker {
     key = "morewishes",

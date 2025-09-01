@@ -27,7 +27,7 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "hawaiitwo",
+    key = "miraclemusical",
     path = sprite_path,
     px = 71,
     py = 95
@@ -272,57 +272,38 @@ SMODS.Joker {
     end
 }
 
+
 SMODS.Joker {
-    key = "hawaiitwo",
-    config = { extra = { xmult = 1, xmult_increase = 0.5 } },
+    key = "miraclemusical",
+    config = { extra = { xmult = 1, xmult_increase = 0.25, retriggers = 1 } },
     pos = {
-        x = 0,
+        x = 6,
         y = 2
     },
-    rarity = 2,
-    cost = 6,
+    rarity = 3,
+    cost = 7,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "hawaiitwo",
+    atlas = "miraclemusical",
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.xmult_increase, card.ability.extra.xmult } }
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_polychrome
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_increase } }
     end,
-
+    
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        if not context.blueprint then
-            local num_queens = 0
-            if context.before then
-                for _, pcard in ipairs(context.scoring_hand) do
-                    if not pcard.debuff and pcard:get_id() == 12 then
-                        num_queens = num_queens + 1
-                    end
-                end
+        if context.repetition and context.other_card.edition and context.other_card.edition.polychrome and not context.other_card.debuff then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase
 
-                if num_queens > 0 then
-                    card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase * num_queens
-
-                    return {
-                        message = localize('k_upgrade_ex'),
-                        message_card = card,
-                        colour = G.C.FILTER
-                    }
-                end
-            end 
-
-            if context.destroy_card and context.cardarea == G.play then
-                if context.destroy_card:get_id() == 12 and not context.destroy_card.debuff then
-                    return {
-                        remove = true
-                    } 
-                end
-            end
+            return {
+                repetitions = card.ability.extra.retriggers
+            }
         end
 
         if context.joker_main then
@@ -332,6 +313,7 @@ SMODS.Joker {
         end
     end
 }
+
 
 SMODS.Joker {
     key = "rasins",
