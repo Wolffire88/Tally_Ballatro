@@ -1,0 +1,25 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Set up and flag "played this round" when a card is scored
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''G.hand.highlighted[i].ability.played_this_ante = true'''
+position = "after"
+payload = '''G.hand.highlighted[i].ability.played_this_round = true'''
+match_indent = true
+
+# Deflag "played this round" when selecting a blind
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''
+for k, v in ipairs(G.playing_cards) do
+    v.ability.discarded = nil
+    v.ability.forced_selection = nil
+'''
+position = "after"
+payload = '''    v.ability.played_this_round = false'''
+match_indent = true

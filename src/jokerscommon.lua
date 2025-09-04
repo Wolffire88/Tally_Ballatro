@@ -87,26 +87,11 @@ SMODS.Joker{
     atlas = "joehawleyjoehawley",
 
     calculate = function(self, card, context)
-        -- Set all cards to have not been played this round
-        if context.setting_blind then
-            for _, deck_card in ipairs(G.deck.cards) do
-                deck_card.ability.JH_played_this_round = false
-            end
-        end
-
         if context.repetition and context.cardarea == G.play then
-            context.other_card.ability.JH_played_this_round = true
-
-            if context.other_card.ability.JH_played_before and not card.debuff then
+            if G.GAME.current_round.played_before and is_in_table(G.GAME.current_round.played_before, context.other_card) and not card.debuff then
                 return {
                     repetitions = card.ability.extra.repetitions
                 }
-            end
-        end
-
-        if context.ending_shop then
-            for _, deck_card in ipairs(G.deck.cards) do
-                deck_card.ability.JH_played_before = deck_card.ability.JH_played_this_round
             end
         end
     end

@@ -46,7 +46,12 @@ local function reset_tallymail_rank()
 end
 
 local function JH_lastplayed_check()
-
+    G.GAME.current_round.played_before = {}
+    for _, playing_card in ipairs(G.playing_cards) do
+        if playing_card.ability.played_this_round then
+            G.GAME.current_round.played_before[#G.GAME.current_round.played_before + 1] = playing_card
+        end
+    end
 end
 
 function SMODS.current_mod.reset_game_globals(run_start)
