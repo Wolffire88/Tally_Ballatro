@@ -341,33 +341,6 @@ SMODS.Joker {
             end
         end
 
-        local ret1 = SMODS.blueprint_effect(card, joker1, context)
-        local ret2 = SMODS.blueprint_effect(card, joker2, context)
-
-        if ret1 then 
-            ret1.colour = G.C.GREY 
-        end
-        if ret2 then 
-            ret2.colour = G.C.GREY
-        end
-
-        -- works but I also don't know why
-        if ret1 then
-            if ret2 then
-                return SMODS.merge_effects({ ret1, ret2 })      -- i hate merge effects
-            else
-                return ret1
-            end
-        elseif ret2 then
-            return ret2
-        end
-
-        -- dunno why this doesn't work
-        -- if ret1 or ret2 then
-        --     print("Merged tables:")
-        --     print(SMODS.merge_effects({ ret1, ret2 }))
-        -- end
-
-        -- return SMODS.merge_effects({ ret1, ret2 })
+        return tb_federman_effect(card, joker1, joker2, context)
     end
 }
