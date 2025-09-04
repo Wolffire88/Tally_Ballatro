@@ -271,9 +271,10 @@ return {
             j_tb_hawley = {
                 name = "The Singer",
                 text = {
-                    "This joker gains {X:mult,C:white}x#1#{} mult",
-                    "per played {C:attention}debuffed{} card.",
-                    "{C:inactive}(Currently {X:mult,C:white}x#2#{C:inactive} mult){}"
+                    "This joker gains {X:mult,C:white}x#2#{} mult",
+                    "whenever a {C:attention}debuffed{} played card",
+                    "or joker attempts to trigger.",
+                    "{C:inactive}(Currently {X:mult,C:white}x#1#{C:inactive} mult){}"
                 },
                 unlock = {
                     "?????"
