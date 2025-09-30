@@ -246,7 +246,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "gallagher",
-    config = { extra = { odds = 4 } },
+    config = { extra = { odds = 3 } },
     pos = {
         x = 0,
         y = 4
