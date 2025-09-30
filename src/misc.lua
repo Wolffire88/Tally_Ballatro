@@ -130,7 +130,7 @@ SMODS.Consumable {
 SMODS.Consumable {
     key = "ego",
     set = "Spectral",
-    config = { max_highlighted = 1 },
+    config = { max_highlighted = 1, destroy_odds = 4 },
     pos = {
         x = 1,
         y = 0
@@ -141,10 +141,15 @@ SMODS.Consumable {
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_tb_zirconium
-        return { vars = { card.ability.max_highlighted } }
+        return { vars = { card.ability.max_highlighted, G.GAME.probabilities.normal, card.ability.destroy_odds } }
     end,
 
     use = function(self, card, area, copier)
+        if pseudorandom('egocentric') < G.GAME.probabilities.normal / card.ability.destroy_odds then
+            SMODS.destroy_card(G.hand.highlighted[1])
+            return nil
+        end
+
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             delay = 0.4,
