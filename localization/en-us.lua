@@ -25,7 +25,8 @@ return {
                 name = "Ego",
                 text = {
                     "Add {C:dark_edition}zirconium{} to",
-                    "{C:attention}#1#{} selected card in hand"
+                    "{C:attention}#1#{} selected card in hand",
+                    "{C:green}#2# in #3#{} chance to destroy selected card instead.}"
                 }
             }
         },
@@ -111,8 +112,7 @@ return {
                 text = {
                     "{C:mult}+#1#{} mult if full hand contains",
                     "{C:attention}no gaps in rank{}.",
-                    "{C:inactive}(i.e. 2, 3, 4, 5, 6 or 5, 5, 6, 6, 7)",
-                    "{C:inactive}(Aces count as {C:attention}one above{C:inactive} kings)"
+                    "{C:inactive}(i.e. 2, 3, 4, 5, 6 or 5, 5, 6, 6, 7)"
                 }
             },
 
