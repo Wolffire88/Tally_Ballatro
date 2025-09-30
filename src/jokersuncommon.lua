@@ -341,10 +341,9 @@ SMODS.Joker {
 
         if context.individual and context.cardarea == G.play then
             local rasin_card = nil
-            local temp_rank, temp_mult = 15, 15
+            local temp_rank = 15
             for _, pcard in ipairs(context.scoring_hand) do
                 if temp_rank > pcard:get_id() and not SMODS.has_no_rank(pcard) then
-                    temp_mult = pcard:get_nominal()
                     temp_rank = pcard:get_id()
                     rasin_card = pcard
                 end
@@ -532,7 +531,6 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        -- Placeholder
         if context.joker_main and G.GAME.probabilities.normal/card.ability.extra.odds then
             local unscored = {}
 
