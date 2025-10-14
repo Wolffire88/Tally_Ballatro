@@ -26,7 +26,8 @@ return {
                 text = {
                     "Add {C:dark_edition}zirconium{} to",
                     "{C:attention}#1#{} selected card in hand",
-                    "{C:green}#2# in #3#{} chance to destroy selected card instead.}"
+                    "{C:green}#2# in #3#{} chance to",
+                    "destroy selected card instead.}"
                 }
             }
         },
