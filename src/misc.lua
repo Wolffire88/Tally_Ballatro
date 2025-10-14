@@ -31,6 +31,11 @@ SMODS.Shader {
     path = "zirconium.fs"
 }
 
+SMODS.Sound {
+    key = "e_zirconium",
+    path = "e_zirconium.ogg"
+}
+
 SMODS.Enhancement {
     key = "mechanical",
     config = { x_mult = 1, extra = { xmult_increase = 0.1 } },
@@ -74,7 +79,7 @@ SMODS.Edition {
     unlocked = true,
     discovered = false,
     in_shop = true,
-    sound = { sound = "holo1", per = 1.5, vol = 0.4 },
+    sound = { sound = "tb_e_zirconium", per = 1, vol = 0.2 },
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.edition.x_chips } }
