@@ -75,7 +75,7 @@ SMODS.Edition {
     shader = "zirconium",
     config = { x_chips = 1.5 },
     extra_cost = 4,
-    weight = 4,
+    weight = 5,
     unlocked = true,
     discovered = false,
     in_shop = true,
@@ -86,7 +86,7 @@ SMODS.Edition {
     end,
 
     get_weight = function(self)
-        return (G.GAME.edition_rate - 1) * G.P_CENTERS["e_negative"].weight + G.GAME.edition_rate * self.weight
+        return G.GAME.edition_rate * self.weight
     end,
 
     calculate = function(self, card, context)
