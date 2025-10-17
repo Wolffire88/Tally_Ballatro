@@ -1,31 +1,3 @@
-SMODS.Atlas {
-    key = "modicon",
-    path = "tb_logo.png",
-    px = 32,
-    py = 32
-}
-
-SMODS.Atlas {
-    key = "mechanical",
-    path = "mechanical.png",
-    px = 71,
-    py = 95
-}
-
-SMODS.Atlas {
-    key = "cog",
-    path = "consumables.png",
-    px = 71,
-    py = 95
-}
-
-SMODS.Atlas {
-    key = "ego",
-    path = "consumables.png",
-    px = 71,
-    py = 95
-}
-
 SMODS.Shader {
     key = "zirconium",
     path = "zirconium.fs"
@@ -124,7 +96,7 @@ SMODS.Consumable {
     },
     unlocked = true,
     discovered = false,
-    atlas = "cog",
+    atlas = "tb_consum",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
@@ -142,7 +114,7 @@ SMODS.Consumable {
     },
     unlocked = true,
     discovered = false,
-    atlas = "ego",
+    atlas = "tb_consum",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_tb_zirconium

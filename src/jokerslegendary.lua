@@ -1,39 +1,3 @@
-SMODS.Atlas({
-    key = "hawley",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "horowitz",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "seghisi",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "federman",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "cantor",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-
 SMODS.Joker {
     key = "hawley",
     config = { extra = { xmult = 1, xmult_increase = 1 } },
@@ -52,7 +16,7 @@ SMODS.Joker {
         x = 4,
         y = 3
     },
-    atlas = "hawley",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_increase } }
@@ -116,7 +80,7 @@ SMODS.Joker {
         x = 6,
         y = 3
     },
-    atlas = "horowitz", 
+    atlas = "tb_joker", 
     
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -191,7 +155,7 @@ SMODS.Joker {
         x = 2,
         y = 4
     },
-    atlas = "seghisi",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.tags, card.ability.extra.tag_increase, card.ability.extra.to_skip, card.ability.extra.skips } }
@@ -254,7 +218,7 @@ SMODS.Joker {
         x = 4,
         y = 4
     },
-    atlas = "federman",
+    atlas = "tb_joker",
     
     loc_vars = function(self, info_queue, card)
         if card.area and card.area == G.jokers then
@@ -331,7 +295,7 @@ SMODS.Joker {
         x = 6,
         y = 4
     },
-    atlas = "cantor",
+    atlas = "tb_joker",
     
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_increase } }

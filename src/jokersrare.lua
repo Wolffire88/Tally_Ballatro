@@ -1,39 +1,3 @@
-SMODS.Atlas({
-    key = "hawaiitwo",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "morewishes",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "technicaldifficulties",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "maryashley",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "gallagher",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-
 SMODS.Joker {
     key = "hawaiitwo",
     config = { extra = { xmult = 1, xmult_increase = 0.5 } },
@@ -49,7 +13,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "hawaiitwo",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult_increase, card.ability.extra.xmult } }
@@ -111,7 +75,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "morewishes",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)
         if card.debuff then return nil end
@@ -162,7 +126,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "technicaldifficulties",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_increase, G.GAME and G.GAME.probabilities.normal or 1, card.ability.extra.odds } }
@@ -221,7 +185,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "maryashley",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }
@@ -259,7 +223,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "gallagher",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         if card.area and card.area == G.jokers then

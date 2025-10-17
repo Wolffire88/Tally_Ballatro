@@ -1,73 +1,3 @@
-SMODS.Atlas({
-    key = "joehawleyjoehawley",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "purpletie",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "englishchap",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "spaghettibathtub",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "zirconiumpants",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "naturalketchup",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "cloudvariations",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "notatrampoline",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "goodandevil",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "missmelody",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
 --[[
 Joe Hawley Joe Hawley (Common)
 Joker retriggers all cards played in the previous round
@@ -87,7 +17,7 @@ SMODS.Joker{
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "joehawleyjoehawley",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
@@ -120,7 +50,7 @@ SMODS.Joker{
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "purpletie",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_SEALS['Purple']
@@ -202,7 +132,7 @@ SMODS.Joker{
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "englishchap",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         local chap_rank = G.GAME.current_round.english_chap_rank or { rank = 'Ace' }
@@ -250,7 +180,7 @@ SMODS.Joker{
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "spaghettibathtub",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xchips, card.ability.extra.xchip_loss }}
@@ -328,7 +258,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "zirconiumpants",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card) 
         info_queue[#info_queue + 1] = G.P_CENTERS.e_tb_zirconium
@@ -402,7 +332,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "naturalketchup",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult, card.ability.extra.mult_loss } }
@@ -478,7 +408,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "cloudvariations",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
@@ -536,7 +466,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "notatrampoline",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
@@ -603,7 +533,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "goodandevil",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips, card.ability.extra.chip_loss, card.ability.extra.mult, card.ability.extra.mult_loss,} }
@@ -712,7 +642,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "missmelody",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card) 
         return { vars = { card.ability.extra.chips } }

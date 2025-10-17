@@ -1,74 +1,3 @@
-SMODS.Atlas({
-    key = "mechanicalmuseum",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "bora",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "muckablucka",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "letskillross",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "miraclemusical",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "rasins",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "hiddeninthesand",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "shialabeouf",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "rulerofeverything",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "tallymail",
-    path = sprite_path,
-    px = 71,
-    py = 95
-})
-
-
 SMODS.Joker {
     key = "mechanicalmuseum",
     config = {},
@@ -84,7 +13,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "mechanicalmuseum",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_tb_mechanical
@@ -134,7 +63,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "bora",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.is_active and 'active' or 'inactive' }}
@@ -189,7 +118,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "muckablucka",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)
         if card.debuff then return nil end
@@ -237,7 +166,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "letskillross",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         local ross_suit = G.GAME.current_round.ross_suit or { suit = 'Spades' }
@@ -288,7 +217,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "miraclemusical",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_polychrome
@@ -330,7 +259,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "rasins",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult, card.ability.extra.triggers } }
@@ -417,7 +346,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "hiddeninthesand",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
@@ -480,7 +409,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "shialabeouf",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)
         if card.debuff then return nil end
@@ -521,7 +450,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "rulerofeverything",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_tb_zirconium
@@ -576,7 +505,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tallymail",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         local tally_rank = G.GAME.current_round.tallymail or { rank = 'Ace' } 
