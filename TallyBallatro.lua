@@ -8,7 +8,7 @@ else
 end
 
 -- Atlases
-asser(SMODS.load_file("src/atlases.lua"))()
+assert(SMODS.load_file("src/atlases.lua"))()
 
 -- Jokers
 assert(SMODS.load_file("src/jokerscommon.lua"))()
