@@ -73,9 +73,8 @@ return {
                 name = "Mashup",
                 text = {
                     "Merge two cards together.",
-                    "The new card takes on the {C:spade}suit{} of the",
-                    "{C:attention}left card{} and the {C:heart]rank{}",
-                    "of the {C:attentionright card{}.",
+                    "The new card takes on the {C:spades}suit{} of the",
+                    "{C:attention}left card{} and the {C:hearts}rank{} of the {C:attention}right card{}.",
                     "{C:attention}Enhancements/Seals/Editions{} carry",
                     "over on a priority basis."
                 }

@@ -241,15 +241,17 @@ SMODS.Consumable {
             edition = edition,
             enhancement = enhancement,
             seal = seal,
-            rank = card1.base.value,
-            suit = card2.base.suit
+            rank = card2.base.value,
+            suit = card1.base.suit
         })
+        G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+        fusion.playing_card = G.playing_card
+        table.insert(G.playing_cards, fusion)
+        G.hand:emplace(fusion)
+        fusion:add_to_deck()
 
         --Kill the main cards
         SMODS.destroy_cards({card1, card2})
-
-        G.hand:emplace(fusion)
-        fusion:add_to_deck()
     end
 }
 
