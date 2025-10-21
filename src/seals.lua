@@ -73,8 +73,8 @@ SMODS.Seal {
     end,
 
     calculate = function(self, card, context)
-        if context.post_joker then
-            local xmult_actual = card.ability.seal.extra.xmult * #G.consumables.cards
+        if context.main_scoring and context.cardarea == G.play then
+            local xmult_actual = card.ability.seal.extra.xmult * #G.consumeables.cards
             return {
                 xmult = xmult_actual
             }

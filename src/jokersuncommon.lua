@@ -652,6 +652,24 @@ SMODS.Joker {
         if valid_cards then
             card.ability.extra.copy_card = pseudorandom_element(valid_cards, 'perfect')
         end
+    end,
+
+    load = function(self, card, card_table, other_card)
+        --Refresh the copying card since the game must be weird for some reason.
+        if card_table.ability.extra.copy_card then
+            local key = card_table.ability.extra.copy_card.unique_val
+
+            for _, jcard in ipairs(G.jokers.cards) do
+                if jcard.val == key then
+                    card_table.ability.extra.copy_card = jcard
+                    return
+                end
+            end
+
+            self:set_ability(card_table)
+        else
+            self:set_ability(card_table)
+        end
     end
 }
 
