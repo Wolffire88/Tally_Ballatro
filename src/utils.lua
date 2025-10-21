@@ -93,7 +93,7 @@ TB.DreamJournal = {
     end,
 
     Rob = function(card, context)
-        if context.individual and next(SMODS.get_enhancements(context.other_card)) then
+        if context.individual and next(SMODS.get_enhancements(context.other_card)) and context.cardarea == G.play then
             return {
                 xmult = 1.2
             }
