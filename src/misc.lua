@@ -177,25 +177,30 @@ SMODS.Consumable {
     end,
 
     use = function(self, card, area, copier)
-        local edition, enhancement, seal, nominal_chips, nominal_mult
-
         local card1 = G.hand.highlighted[1]
         local card2 = G.hand.highlighted[2]
+
+        local cardtable = {
+            set = "Playing Card",
+            area = G.hand,
+            rank = card2.base.value,
+            suit = card1.base.suit
+        }
 
         --get edition
         local c1_ed = card1.edition and card1.edition.key
         local c2_ed = card2.edition and card2.edition.key
 
         if c1_ed == c2_ed then
-            edition = c1_ed
+            cardtable.edition = c1_ed
         elseif c1_ed then
             if c2_ed and (G.P_CENTERS[c2_ed].order > G.P_CENTERS[c1_ed].order) then
-                edition = c2_ed
+                cardtable.edition = c2_ed
             else
-                edition = c1_ed
+                cardtable.edition = c1_ed
             end
         elseif c2_ed then
-            edition = c2_ed
+            cardtable.edition = c2_ed
         end
 
         --get enhancement
@@ -203,15 +208,15 @@ SMODS.Consumable {
         local c2_en = (card2.ability.set == "Enhanced") and card2.config.center.key
 
         if c1_en == c2_en then
-            enhancement = c1_en
+            cardtable.enhancement = c1_en
         elseif c1_en then
             if c2_en and (G.P_CENTERS[c2_en].order > G.P_CENTERS[c1_en].order) then
-                enhancement = c2_en
+                cardtable.enhancement = c2_en
             else
-                enhancement = c1_en
+                cardtable.enhancement = c1_en
             end
         elseif c2_en then
-            enhancement = c2_en
+            cardtable.enhancement = c2_en
         end
 
         --get seal
@@ -219,15 +224,15 @@ SMODS.Consumable {
         local c2_s = card2:get_seal()
 
         if c1_s == c2_s then
-            seal = c1_en
+            cardtable.seal = c1_en
         elseif c1_s then
             if c2_s and (G.P_CENTERS[c2_s].order > G.P_CENTERS[c1_s].order) then
-                seal = c2_s
+                cardtable.seal = c2_s
             else
-                seal = c1_s
+                cardtable.seal = c1_s
             end
         elseif c2_s then
-            seal = c2_s
+            cardtable.seal = c2_s
         end
 
         --Additional stuff
@@ -235,15 +240,9 @@ SMODS.Consumable {
         nominal_mult = card1:get_chip_mult() + card2:get_chip_mult()
 
         --FUSION DANCE
-        local fusion = SMODS.create_card({
-            set = "Playing Card",
-            area = G.hand,
-            edition = edition,
-            enhancement = enhancement,
-            seal = seal,
-            rank = card2.base.value,
-            suit = card1.base.suit
-        })
+        local fusion = SMODS.create_card(cardtable)
+        fusion.ability.perma_mult = nominal_mult
+        fusion.ability.perma_bonus = nominal_chips
         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
         fusion.playing_card = G.playing_card
         table.insert(G.playing_cards, fusion)
