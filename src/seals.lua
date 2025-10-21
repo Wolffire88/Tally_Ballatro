@@ -60,7 +60,7 @@ SMODS.Seal {
     key = "greentie",
     atlas = "ties",
     badge_colour = G.C.GREEN,
-    config = { extra = { xmult = 0.2 } },
+    config = { extra = { xmult = 1.2 } },
     pos = {
         x = 2,
         y = 0
