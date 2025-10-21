@@ -417,7 +417,10 @@ SMODS.Joker {
         if card.debuff then return nil end
 
         if context.end_of_round and context.main_eval and not context.blueprint then
-            card.ability.extra.dream_effect = math.floor((pseudorandom('dreamjournal') * 5) + 1)
+            local previous = card.ability.extra.dream_effect
+            while previous = card.ability.extra.dream_effect do
+                card.ability.extra.dream_effect = math.floor((pseudorandom('dreamjournal') * 5) + 1)
+            end
 
             if card.ability.extra.dream_effect == 1 then
                 local pokerhand = {}
