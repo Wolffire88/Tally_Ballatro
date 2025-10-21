@@ -418,7 +418,7 @@ SMODS.Joker {
 
         if context.end_of_round and context.main_eval and not context.blueprint then
             local previous = card.ability.extra.dream_effect
-            while previous = card.ability.extra.dream_effect do
+            while previous == card.ability.extra.dream_effect do
                 card.ability.extra.dream_effect = math.floor((pseudorandom('dreamjournal') * 5) + 1)
             end
 
