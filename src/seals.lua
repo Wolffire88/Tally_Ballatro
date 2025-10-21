@@ -60,7 +60,7 @@ SMODS.Seal {
     key = "greentie",
     atlas = "ties",
     badge_colour = G.C.GREEN,
-    config = { extra = { xmult = 1.2 } },
+    config = { extra = { xmult = 0.2 } },
     pos = {
         x = 2,
         y = 0
@@ -69,12 +69,12 @@ SMODS.Seal {
     discovered = false,
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.seal.extra.xmult } }
+        return { vars = { 1 + card.ability.seal.extra.xmult } }
     end,
 
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            local xmult_actual = card.ability.seal.extra.xmult * #G.consumeables.cards
+            local xmult_actual = card.ability.seal.extra.xmult ^ #G.consumeables.cards
             return {
                 xmult = xmult_actual
             }
