@@ -69,7 +69,7 @@ SMODS.Seal {
     discovered = false,
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { 1 + card.ability.seal.extra.xmult } }
+        return { vars = { card.ability.seal.extra.xmult } }
     end,
 
     calculate = function(self, card, context)
