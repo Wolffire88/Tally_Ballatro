@@ -1,5 +1,6 @@
 SMODS.Joker {
     key = "hawley",
+    name = "The Singer",
     config = { extra = { xmult = 1, xmult_increase = 1 } },
     pos = {
         x = 3,
@@ -64,6 +65,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "horowitz",
+    name = "The Pianist",
     config = { extra = { create = 1, create_inc = 1, to_play = 30, played = 0, create_cap = 12 } },
     pos = {
         x = 5,
@@ -139,6 +141,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "seghisi",
+    name = "The Bassist",
     config = { extra = { tags = 1, tag_increase = 1, to_skip = 3, skips = 0 } },
     pos = {
         x = 1,
@@ -202,6 +205,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "federman",
+    name = "The Drummer",
     config = {},
     pos = {
         x = 3,
@@ -273,12 +277,13 @@ SMODS.Joker {
             end
         end
 
-        return tb_federman_effect(card, joker1, joker2, context)
+        return TB.federman_effect(card, joker1, joker2, context)
     end
 }
 
 SMODS.Joker {
     key = "cantor",
+    name = "The Guitarist",
     config = { extra = { xmult = 1, xmult_increase = 0.5 } },
     pos = {
         x = 5,
@@ -320,6 +325,111 @@ SMODS.Joker {
             return {
                 xmult = card.ability.extra.xmult
             }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "karaca",
+    name = "The Performer",
+    config = { extra = { xmult = 1, xmult_increase = 0.34 } },
+    pos = {
+        x = 0,
+        y = 2
+    },
+    rarity = 4,
+    cost = 20,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = false,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    soul_pos = {
+        x = 1,
+        y = 2
+    },
+    atlas = "tb_joker_2",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult_increase, card.ability.extra.xmult } }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+
+        if context.end_of_round and context.cardarea == G.jokers and G.GAME.last_hand_played == 'High Card' and not context.blueprint then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase
+            return {
+                message = localize('k_upgrade_ex')
+            }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "shea",
+    name = "The Stand In",
+    config = { extra = { rounds_left = 2, odds = 3 } },
+    pos = {
+        x = 2,
+        y = 2
+    },
+    rarity = 4,
+    cost = 20,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = false,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    soul_pos = {
+        x = 3,
+        y = 2
+    },
+    atlas = "tb_joker_2",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.rounds_left, (G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.odds } }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff and context.blueprint then return nil end
+
+        if context.end_of_round and card.ability.extra.rounds_left > 0 and context.cardarea == G.jokers then
+            local retmessage = nil
+
+            card.ability.extra.rounds_left = card.ability.extra.rounds_left - 1
+            if card.ability.extra.rounds_left == 0 then
+                juice_card_until(card, function() return not card.REMOVED end, true)
+                retmessage = localize("k_active_ex")
+            else
+                retmessage = (2 - card.ability.extra.rounds_left).."/2"
+            end
+
+            return {
+                message = retmessage
+            }
+        end
+
+        if context.selling_self and card.ability.extra.rounds_left == 0 then
+            if #G.jokers.cards <= G.jokers.config.card_limit then
+                local legendary_card = create_card("Joker", G.jokers, true)
+                G.jokers:emplace(legendary_card)
+                legendary_card:add_to_deck()
+            end
+
+            if #G.jokers.cards <= G.jokers.config.card_limit and pseudorandom('shea_return') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                local shea_copy = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_tb_shea")
+                G.jokers:emplace(shea_copy)
+                shea_copy:add_to_deck()
+            end
         end
     end
 }

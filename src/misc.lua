@@ -86,6 +86,7 @@ SMODS.Edition {
     end
 }
 
+-- Tarots
 SMODS.Consumable {
     key = "cog",
     set = "Tarot",
@@ -105,12 +106,162 @@ SMODS.Consumable {
 }
 
 SMODS.Consumable {
+    key = "doctorate",
+    set = "Tarot",
+    config = { extra = { dollars = 5 } },
+    pos = {
+        x = 1,
+        y = 0
+    },
+    unlocked = true,
+    discovered = false,
+    atlas = "tb_consum",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.dollars } }
+    end,
+
+    use = function(self, card, area, copier)
+        local tiecards = {}
+        local bluecards = {}
+        for _, hcard in ipairs(G.hand.cards) do
+            if TB.is_in_table(TB.TIES, hcard:get_seal()) then
+                if hcard:get_seal() == "tb_bluetie" then
+                    table.insert(bluecards, hcard)
+                else
+                    table.insert(tiecards, hcard)
+                end
+            end
+        end
+
+        local total_dollars = (card.ability.extra.dollars * 2 * #bluecards) + (card.ability.extra.dollars *  #tiecards) 
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('timpani')
+                card:juice_up()
+                ease_dollars(total_dollars, true)
+                return true
+            end
+        }))
+
+        delay(0.6)
+    end,
+
+    can_use = function(self, card)
+        local legal_select = true
+        if not (G.hand and #G.hand.cards > 0) then
+            legal_select = false
+        end
+
+        return legal_select 
+    end
+}
+
+SMODS.Consumable {
+    key = "mashup",
+    set = "Tarot",
+    config = { max_highlighted = 2 },
+    pos = {
+        x = 2,
+        y = 0
+    },
+    unlocked = true,
+    discovered = false,
+    atlas = "tb_consum",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.max_highlighted } }
+    end,
+
+    use = function(self, card, area, copier)
+        local edition, enhancement, seal, nominal_chips, nominal_mult
+
+        local card1 = G.hand.highlighted[1]
+        local card2 = G.hand.highlighted[2]
+
+        --get edition
+        local c1_ed = card1.edition and card1.edition.key
+        local c2_ed = card2.edition and card2.edition.key
+
+        if c1_ed == c2_ed then
+            edition = c1_ed
+        elseif c1_ed then
+            if c2_ed and (G.P_CENTERS[c2_ed].order > G.P_CENTERS[c1_ed].order) then
+                edition = c2_ed
+            else
+                edition = c1_ed
+            end
+        elseif c2_ed then
+            edition = c2_ed
+        end
+
+        --get enhancement
+        local c1_en = (card1.ability.set == "Enhanced") and card1.config.center.key
+        local c2_en = (card2.ability.set == "Enhanced") and card2.config.center.key
+
+        if c1_en == c2_en then
+            enhancement = c1_en
+        elseif c1_en then
+            if c2_en and (G.P_CENTERS[c2_en].order > G.P_CENTERS[c1_en].order) then
+                enhancement = c2_en
+            else
+                enhancement = c1_en
+            end
+        elseif c2_en then
+            enhancement = c2_en
+        end
+
+        --get seal
+        local c1_s = card1:get_seal() 
+        local c2_s = card2:get_seal()
+
+        if c1_s == c2_s then
+            seal = c1_en
+        elseif c1_s then
+            if c2_s and (G.P_CENTERS[c2_s].order > G.P_CENTERS[c1_s].order) then
+                seal = c2_s
+            else
+                seal = c1_s
+            end
+        elseif c2_s then
+            seal = c2_s
+        end
+
+        --Additional stuff
+        nominal_chips = card1:get_chip_bonus() + card2:get_chip_bonus()
+        nominal_mult = card1:get_chip_mult() + card2:get_chip_mult()
+
+        --FUSION DANCE
+        local fusion = SMODS.create_card({
+            set = "Playing Card",
+            area = G.hand,
+            edition = edition,
+            enhancement = enhancement,
+            seal = seal,
+            rank = card1.base.value,
+            suit = card2.base.suit
+        })
+
+        --Kill the main cards
+        SMODS.destroy_cards({card1, card2})
+
+        G.hand:emplace(fusion)
+        fusion:add_to_deck()
+    end
+}
+
+
+-- Spectrals
+SMODS.Consumable {
     key = "ego",
     set = "Spectral",
     config = { max_highlighted = 1, destroy_odds = 4 },
     pos = {
-        x = 1,
-        y = 0
+        x = 0,
+        y = 2
     },
     unlocked = true,
     discovered = false,
@@ -134,9 +285,102 @@ SMODS.Consumable {
                 local ego_card = G.hand.highlighted[1]
                 ego_card:set_edition("e_tb_zirconium", true)
                 card:juice_up()
+                ego_card:juice_up()
                 return true
             end
         }))
+    end,
+
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
+            card.children.center:draw_shader('booster', nil, card.ARGS.send_to_shader)
+        end
+    end
+}
+
+SMODS.Consumable {
+    key = "band",
+    set = "Spectral",
+    config = { max_highlighted = 1 },
+    pos = {
+        x = 1,
+        y = 2
+    },
+    unlocked = true,
+    discovered = false,
+    atlas = "tb_consum",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.max_highlighted } }
+    end,
+
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                local tie_card = G.hand.highlighted[1]
+                tie_card:set_seal(SMODS.poll_seal({ key = "randtie", guaranteed = true, options = TB.TIES }))
+                card:juice_up()
+                tie_card:juice_up()
+                return true
+            end
+        }))
+    end,
+
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
+            card.children.center:draw_shader('booster', nil, card.ARGS.send_to_shader)
+        end
+    end
+}
+
+SMODS.Consumable {
+    key = "hiatus",
+    set = "Spectral",
+    config = { max_highlighted = 3 },
+    pos = {
+        x = 2,
+        y = 2
+    },
+    unlocked = true,
+    discovered = false,
+    atlas = "tb_consum",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.max_highlighted } }
+    end,
+
+    use = function(self, card, area, copier)
+        local dollars = 0
+        for _, sacrifice in ipairs(G.hand.highlighted) do
+            SMODS.debuff_card(sacrifice, true, "tb_hiatus")
+            dollars = dollars + sacrifice:get_chip_bonus()
+        end
+
+        delay(0.5)
+        ease_dollars(dollars)
+        delay(0.3)
+    end,
+
+    can_use = function(self, card)
+        local legal_select = true
+        for _, sacrifice in ipairs(G.hand.highlighted) do
+            if sacrifice:get_seal() == "tb_redtie" then
+                legal_select = false
+                break
+            end
+        end
+
+        if #G.hand.highlighted > card.ability.max_highlighted then
+            legal_select = false
+        end
+
+        if not (G.hand and #G.hand.cards > 0) then
+            legal_select = false
+        end
+
+        return legal_select 
     end,
 
     draw = function(self, card, layer)

@@ -1,11 +1,14 @@
--- Sprite sheet logic, Jokers As Neco Arc compatibality
-sprite_path = ""
+-- Removing Neco arc compatibality for now
+--[[
+filename = ""
 local neco = next(SMODS.find_mod("JokersAsNecoArc"))
 if neco then
-    sprite_path = "NecoHall.png"
+    filename = "NecoHall"
 else
-    sprite_path = "THJokers.png"
+    filename = "THJokers"
 end
+]]--
+filename = "THJokers"
 
 -- Atlases
 assert(SMODS.load_file("src/atlases.lua"))()
@@ -24,4 +27,4 @@ assert(SMODS.load_file("src/seals.lua"))()
 
 -- Other files
 assert(SMODS.load_file("src/jokerglobalvals.lua"))()
-assert(SMODS.load_file("src/utilsfunctions.lua"))()
+assert(SMODS.load_file("src/utils.lua"))()

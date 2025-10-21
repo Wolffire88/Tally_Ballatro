@@ -55,6 +55,11 @@ local function JH_lastplayed_check()
 end
 
 function SMODS.current_mod.reset_game_globals(run_start)
+    if run_start and G.GAME then
+        --Seperate flag for Gros Michel for use with bananaman
+        G.GAME.bananas_destroyed = 0
+        G.GAME.pool_flags.michel_in_pool = true
+    end
     reset_chap_rank()
     reset_ross_suit()
     reset_tallymail_rank()

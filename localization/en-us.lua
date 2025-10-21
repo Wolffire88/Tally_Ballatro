@@ -29,6 +29,24 @@ return {
                     "{C:green}#2# in #3#{} chance to",
                     "destroy selected card instead."
                 }
+            },
+
+            c_tb_band = {
+                name = "Band",
+                text = {
+                    "Applies a random {C:attention}Tie{}",
+                    "to {C:attention}#1#{} selected card in hand."
+                }
+            },
+
+            c_tb_hiatus = {
+                name = "Hiatus",
+                text = {
+                    "Perminantly debuffs up to",
+                    "{C:attention}#1#{} selected cards.",
+                    "Gain {C:money}money{} equal to double the total",
+                    "chip value of debuffed cards."
+                }
             }
         },
 
@@ -38,6 +56,28 @@ return {
                 text = {
                     "Enhances {C:attention}#1#{} selected card",
                     "to a {C:attention}#2#{}"
+                }
+            },
+
+            c_tb_doctorate = {
+                name = "Doctorate",
+                text = {
+                    "Gain {C:money}$#1#{} for every",
+                    "{C:attention}Tie{} held in hand.",
+                    "Gain and additional {C:money}$#1#{}",
+                    "if the {C:attention}Tie{} is a {C:blue}Blue Tie{}"
+                }
+            },
+
+            c_tb_mashup = {
+                name = "Mashup",
+                text = {
+                    "Merge two cards together.",
+                    "The new card takes on the {C:spade}suit{} of the",
+                    "{C:attention}left card{} and the {C:heart]rank{}",
+                    "of the {C:attentionright card{}.",
+                    "{C:attention}Enhancements/Seals/Editions{} carry",
+                    "over on a priority basis."
                 }
             }
         },
@@ -134,6 +174,37 @@ return {
                 }
             },
 
+            j_tb_twowuv = {
+                name = "Two Wuv",
+                text = {
+                    "If {C:attention}played hand{} is exactly a",
+                    "{C:attention}pair of queens{} and {C:attention}1 king{},",
+                    "score the king and apply a",
+                    "{C:attention}random enhancement{} to it."
+                }
+            },
+
+            j_tb_edu = {
+                name = "edu",
+                text = {
+                    "Scored 8s and 3s give",
+                    "{C:mult}+#1#{} mult",
+                    "{C:inactive,S:0.8}(Ranks do not change){}"
+                }
+            },
+
+            j_tb_bananaman = {
+                name = "The Banana Man",
+                text = {
+                    "Reintroduces {C:attention}Gros Michel{} to",
+                    "the joker pool. {C:green}#3# in #4#{}",
+                    "for all added jokers to turn",
+                    "into {C:attention}Gros Michel{}. This joker",
+                    "gains {X:mult,C:white}x#1#{} mult per banana",
+                    "destroyed this run. {C:inactive}(currently {X:mult,C:white}x#2#{C:inactive})"
+                }
+            },
+
             j_tb_mechanicalmuseum = {
                 name = "Marvin's Marvelous Mechanical Museum",
                 text = {
@@ -224,6 +295,38 @@ return {
                 }
             },
 
+            j_tb_wholeworld = {
+                name = "The Whole World and You",
+                text = {
+                    "This joker gives {X:mult,C:white}x1{} mult, plus",
+                    "an additional {X:mult,C:white}x#1#{} mult",
+                    "per played {C:spades}Spade{} card. Destroys all",
+                    "played {C:spades}Spade{} cards after scoring.",
+                    "{C:inactive}(suit does not change){}"
+                }
+            },
+
+            j_tb_impressions = {
+                name = "29 impressions, 1 joker",
+                text = {
+                    "This joker copies a {C:attention}random",
+                    "{C:attention}joker{} in the joker tray.",
+                    "{C:inactive}(changes every round)",
+                    "{C:inactive}Currently copying #1#"
+                }
+            },
+
+            j_tb_tapes = {
+                name = "Tapes",
+                text = {
+                    "Destroy all unscored cards",
+                    "Apply a random {C:attention}Tie{} to",
+                    "a card in hand {C:attention}per{}",
+                    "destroyed card.",
+                    "{C:inactive,S:0.8}(Will not overwrite other seals/ties){}"
+                }
+            },
+
             j_tb_miraclemusical = {
                 name = "Miracle Musical",
                 text = {
@@ -252,10 +355,29 @@ return {
             },
 
             j_tb_maryashley = {
-                name = "Mary-Kate and Ashley Olsen",
+                name = "The Ad Twins",
                 text = {
                     "{X:mult,C:white}x#1#{} mult if hand contains",
                     "a pair of {C:attention}Queens{}."
+                }
+            },
+
+            j_tb_boralogue = {
+                name = "Boralogue #1#",
+                text = {
+                    "{X:mult,C:white}x#2#{} mult.",
+                    "Increases by {X:mult,C:white}x#3#{} after",
+                    "clearing a {C:attention}boss blind{}",
+                    "{C:inactive}(Caps at {X:mult,C:white}x#4#{C:inactive})"
+                }
+            },
+
+            j_tb_dreamjournal = {
+                name = "Dream Journal",
+                text = {
+                    "Cycles between {C:attention}5{} different",
+                    "effects.",
+                    "{C:inactive}(Changes every round){}"
                 }
             },
 
@@ -330,6 +452,134 @@ return {
                 unlock = {
                     "?????"
                 }
+            },
+
+            j_tb_shea = {
+                name = "The Stand In",
+                text = {
+                    "After {C:attention}#1#{} round(s)",
+                    "sell this joker to create a",
+                    "random {C:legendary}legendary joker{}",
+                    "{C:green}#2# in #3#{} chance this joker",
+                    "returns to the joker tray after being sold.",
+                    "{C:inactive,S:0.8}(Must have room){}"
+                },
+                unlock = {
+                    "?????"
+                }
+            },
+
+            j_tb_karaca = {
+                name = "The Performer",
+                text = {
+                    "This joker gains {X:mult,C:white}x#1#{} mult if",
+                    "the final played hand is a {C:attentinon}High Card{}",
+                    "{C:inactive}(Currently {X:mult,C:white}x#2#{C:inactive} mult){}"
+                },
+                unlock = {
+                    "?????"
+                }
+            }
+        },
+
+        Other = {
+            tb_redtie_seal = {
+                name = "Red Tie",
+                text = {
+                    "This card cannot be {C:red}debuffed{}."
+                }
+            },
+
+            tb_bluetie_seal = {
+                name = "Blue Tie",
+                text = {
+                    "{C:green}#1# in #2#{} chance to create",
+                    "a random {C:attention}skip tag{} if this card",
+                    "is held in hand at {C:attention}end of round{}."
+                }
+            },
+
+            tb_greentie_seal = {
+                name = "Green Tie",
+                text = {
+                    "{X:mult,C:white}x#1#{} mult per {C:attention}consumable{}",
+                    "in the consumables tray"
+                }
+            },
+
+            tb_yellowtie_seal = {
+                name = "Yellow Tie",
+                text = {
+                    "{C:mult}+#1#{} mult if scored hand",
+                    "contains a {C:hearts}heart{}"
+                }
+            },
+
+            tb_graytie_seal = {
+                name = "Gray Tie",
+                text = {
+                    "Retriggers played cards to the",
+                    "{C:attention}left and {C:attention}right{} of this one"
+                }
+            },
+
+            tb_blacktie_seal = {
+                name = "Black Tie",
+                text = {
+                    "Takes on the effect of a",
+                    "random {C:attention}vanilla seal.{}",
+                    "{C:inactive}(Currently #1#){}",
+                    "{C:inactive}(Changes every round){}"
+                }
+            },
+
+            tb_orangetie_seal = {
+                name = "Orange Tie",
+                text = {
+                    "{C:green}#1# in #2#{} chance to level up",
+                    "{C:attention}High Card{} when discarded."
+                }
+            },
+
+            --Dream Journal
+            tb_d_ross = {
+                name = "Current Effect:",
+                text = {
+                    "Apply a {C:grey}Gray Tie{} to a",
+                    "random playing card if",
+                    "scored hand is a {C:attention}#1#{}"
+                }
+            },
+            tb_d_andrew = {
+                name = "Current Effect:",
+                text = {
+                    "Retrigger a random playing",
+                    "card. That card gains {C:mult}+#1#{} mult"
+                }
+            },
+            tb_d_joe = {
+                name = "Current Effect:",
+                text = {
+                    "{X:edition,C:chips}^#1#{} chips and {X:edition,C:mult}^#2#{} mult"
+                }
+            },
+            tb_d_zubin = {
+                name = "Current Effect:",
+                text = {
+                    "{C:chips}+#1#{} chips"
+                }
+            },
+            tb_d_rob = {
+                name = "Current Effect:",
+                text = {
+                    "Enhanced cards give {X:mult,C:white}x#1#{} mult"
+                }
+            },
+            tb_d_none = {
+                name = "Current Effect:",
+                text = {
+                    "None"
+                }
             }
         }
     },
@@ -337,29 +587,43 @@ return {
     misc = {
         dictionary = {
             -- scoring stuff
-            a_chips = "+#1#",
-            a_chips_minus = "-#1#",
-            a_hands = "+#1# Hands",
-            a_handsize = "+#1# Hand Size",
-            a_handsize_minus = "-#1# Hand Size",
-            a_mult = "+#1# Mult",
-            a_mult_minus = "-#1# Mult",
-            a_remaining = "#1# Remaining",
-            a_sold_tally = "#1#/#2# Sold",
-            a_xmult = "X#1# Mult",
-            a_xmult_minus = "-X#1# Mult",
-            a_xchips = "X#1# Chips",
-            a_xchips_minus = "-X#1# Chips",
+            a_chips         = "+#1#",
+            a_chips_minus   = "-#1#",
+            a_hands         = "+#1# Hands",
+            a_handsize      = "+#1# Hand Size",
+            a_handsize_minus= "-#1# Hand Size",
+            a_mult          = "+#1# Mult",
+            a_mult_minus    = "-#1# Mult",
+            a_remaining     = "#1# Remaining",
+            a_sold_tally    = "#1#/#2# Sold",
+            a_xmult         = "X#1# Mult",
+            a_xmult_minus   = "X-#1# Mult",
+            a_xchips        = "X#1#",
+            a_xchips_minus  = "X-#1#",
 
             -- misc
-            k_hiatus = "On Hiatus!",
-            k_left_ex = "Left the band!",
-            k_trance = "Put in a trance",
+            k_hiatus    = "On Hiatus!",
+            k_left_ex   = "Left the band!",
+            k_trance    = "Put in a trance!",
             k_zirconium = "Zirconium!"
         },
 
+        v_dictionary = {
+            a_echips        = "^#1#",
+            a_echips_minus  = "^-#1#",
+            a_emult         = "^#1# Mult",
+            a_emult_minus   = "^-#1# Mult"
+        },
+
         labels = {
-            tb_zirconium = "Zirconium"
+            tb_zirconium = "Zirconium",
+            tb_redtie_seal = "Red Tie",
+            tb_bluetie_seal = "Blue Tie",
+            tb_greentie_seal = "Green Tie",
+            tb_yellowtie_seal = "Yellow Tie",
+            tb_graytie_seal = "Gray Tie",
+            tb_blacktie_seal = "Black Tie",
+            tb_orangetie_seal = "Orange Tie"
         }
     }
 }

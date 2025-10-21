@@ -1,0 +1,20 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Prevent red tie cards from getting debuffed
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:set_debuff(should_debuff)"
+position = "after"
+payload = '''
+    if self.seal == "tb_redtie" then
+        if self.debuff then
+            self.debuff = false
+        end
+        return
+    end
+'''
+match_indent = true
+

@@ -1,5 +1,6 @@
 SMODS.Joker {
     key = "mechanicalmuseum",
+    name = "Mechanical Museum",
     config = {},
     pos = {
         x = 3,
@@ -50,13 +51,14 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "bora",
+    name = "15 Seconds of Bora",
     config = { extra = { xmult = 3, is_active = false, timestamp = os.time() } },
     pos = {
         x = 4,
         y = 1
     },
     rarity = 2,
-    cost = 5,
+    cost = 6,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -105,6 +107,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "muckablucka",
+    name = "Mucka Blucka",
     config = {},
     pos = {
         x = 5,
@@ -153,6 +156,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "letskillross",
+    name = "These are my last words",
     config = { extra = { xchips = 1, xchips_increase = 0.2 } },
     pos = {
         x = 6,
@@ -204,13 +208,14 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "miraclemusical",
+    name = "Miracle Musical",
     config = { extra = { xmult = 1, xmult_increase = 0.25, retriggers = 1 } },
     pos = {
         x = 6,
         y = 2
     },
     rarity = 2,
-    cost = 7,
+    cost = 6,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -246,6 +251,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "rasins",
+    name = "Rasins",
     config = { extra = { xmult = 2, triggers = 10 } },
     pos = {
         x = 1,
@@ -333,13 +339,14 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "hiddeninthesand",
+    name = "Hidden in the Sand",
     config = { extra = { mult = 0 } },
     pos = {
         x = 2,
         y = 2
     },
     rarity = 2,
-    cost = 5,
+    cost = 6,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -361,7 +368,7 @@ SMODS.Joker {
             if not rand_card or SMODS.has_no_rank(rand_card) then return end
 
             if not rand_card.debuff then
-                card.ability.extra.mult = card.ability.extra.mult + id_to_rank(rand_card:get_id())
+                card.ability.extra.mult = card.ability.extra.mult + TB.id_to_rank(rand_card:get_id())
 
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
@@ -396,13 +403,14 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "shialabeouf",
+    name = "Actual Cannibal Shia LaBeouf!",
     config = {},
     pos = {
         x = 3,
         y = 2
     },
     rarity = 2,
-    cost = 5,
+    cost = 6,
     blueprint_compat = false,
     eternal_compat = true,
     unlocked = true,
@@ -417,7 +425,7 @@ SMODS.Joker {
         if context.destroy_card and context.cardarea == G.play and not context.blueprint and
             context.destroy_card == context.scoring_hand[#context.scoring_hand] and not SMODS.has_no_rank(context.destroy_card) then
             if not context.destroy_card.debuff then
-                local card_rank = id_to_rank(context.destroy_card:get_id())
+                local card_rank = TB.id_to_rank(context.destroy_card:get_id())
 
                 return {
                     dollars = card_rank,
@@ -437,6 +445,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "rulerofeverything",
+    name = "The Ruler of Everything",
     config = { extra = { odds = 3 } },
     pos = {
         x = 4,
@@ -464,7 +473,7 @@ SMODS.Joker {
             local unscored = {}
 
             for _, pcard in ipairs(context.full_hand) do
-                if not is_in_table(context.scoring_hand, pcard) then
+                if not TB.is_in_table(context.scoring_hand, pcard) then
                     table.insert(unscored, pcard)
                 end
             end
@@ -492,13 +501,14 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "tallymail",
+    name = "Tally Mail",
     config = { extra = { xmult = 1, xmult_increase = 0.1 } },
     pos = {
         x = 5,
         y = 2
     },
     rarity = 2,
-    cost = 5,
+    cost = 7,
     blueprint_compat = false,
     eternal_compat = true,
     unlocked = true,
@@ -529,6 +539,173 @@ SMODS.Joker {
             return {
                 xmult = card.ability.extra.xmult
             }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "wholeworld",
+    name = "The Whole World",
+    config = { extra = { xmult_rate = 0.4, xmult = 1, spades = {} } },
+    pos = {
+        x = 3,
+        y = 0
+    },
+    rarity = 2,
+    cost = 6,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker_2",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xmult_rate } }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.before and context.full_hand and not context.blueprint then
+            print("spade checkin")
+            for _, pcard in ipairs(context.scoring_hand) do
+                if pcard:is_suit("Spades") and not pcard.debuff then
+                    table.insert(card.ability.extra.spades, pcard)
+                end
+            end
+
+            if card.ability.extra.spades then 
+                print("spades found")
+                card.ability.extra.xmult = 1 + #card.ability.extra.spades * card.ability.extra.xmult_rate
+            end
+
+            print(card.ability.extra.xmult)
+        end
+
+        if context.after and card.ability.extra.spades and not context.blueprint then
+            SMODS.destroy_cards(card.ability.extra.spades)
+
+            card.ability.extra.spades = {}
+        end
+
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "impressions",
+    name = "29 Impressions, 1 Joker",
+    config = { extra = { copy_card = nil } },
+    pos = {
+        x = 0,
+        y = 1
+    },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker_2",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { (card.ability.extra.copy_card and card.ability.extra.copy_card.config.center.name or "None") } }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.setting_blind then
+            local valid_cards = {}
+
+            for _, jonkler in ipairs(G.jokers.cards) do
+                if jonkler ~= card and jonkler.config.center.blueprint_compat then
+                    table.insert(valid_cards, jonkler)
+                end
+            end
+
+            if valid_cards then
+                card.ability.extra.copy_card = pseudorandom_element(valid_cards, 'perfect')
+            end
+        end
+
+        if card.ability.extra.copy_card then
+            return SMODS.blueprint_effect(card, card.ability.extra.copy_card, context)
+        end
+    end,
+
+    set_ability = function(self, card, initial, delay_sprites)
+        local valid_cards = {}
+
+        if G.jokers then
+            for _, jonkler in ipairs(G.jokers.cards) do
+                if jonkler ~= card and jonkler.config.center.blueprint_compat then
+                    table.insert(valid_cards, jonkler)
+                end
+            end
+        end
+
+        if valid_cards then
+            card.ability.extra.copy_card = pseudorandom_element(valid_cards, 'perfect')
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "tapes",
+    name = "Tapes",
+    config = { extra = { chips = 9 } },
+    pos = {
+        x = 1,
+        y = 1
+    },
+    rarity = 2,
+    cost = 6,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker_2",
+
+    calculate = function(self, card, context)   
+        if card.debuff or context.blueprint then return nil end
+
+        if context.before and G.hand then
+            local unscored = {}
+
+            for _, pcard in ipairs(context.full_hand) do
+                if not TB.is_in_table(context.scoring_hand, pcard) then
+                    table.insert(unscored, pcard)
+                end
+            end
+
+            local num_cards = #unscored
+            SMODS.destroy_cards(unscored, nil, true)
+
+            local hand_copy = {}
+            TB.copy_table(G.hand.cards, hand_copy)
+
+            for i=1, num_cards, 1 do
+                if hand_copy then
+                    local tie_card = table.remove(hand_copy, math.random(#hand_copy))
+
+                    if tie_card and not tie_card:get_seal() then
+                        tie_card:set_seal(SMODS.poll_seal( { key = 'tieseal', guaranteed = true, options = TB.TIES} ))
+                    else
+                        i = i - 1 --go back because invalid card
+                    end
+                end
+            end
         end
     end
 }

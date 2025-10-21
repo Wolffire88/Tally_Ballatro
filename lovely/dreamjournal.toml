@@ -1,0 +1,27 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# funny exponents
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif eval_type == 'h_mult' then '''
+position = "before"
+payload = '''
+elseif eval_type == "e_mult" then
+    sound = 'multhit2'--'other1'
+    amt = amt
+    text = localize{type='variable',key='a_emult'..(amt<0 and '_minus' or ''),vars={math.abs(amt)}}
+    colour = G.C.MULT
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == "e_chips" then
+    sound = 'multhit2'--'other1'
+    amt = amt
+    text = localize{type='variable',key='a_echips'..(amt<0 and '_minus' or ''),vars={math.abs(amt)}}
+    colour = G.C.CHIPS
+    config.type = 'fade'
+    config.scale = 0.7
+'''
+match_indent = true

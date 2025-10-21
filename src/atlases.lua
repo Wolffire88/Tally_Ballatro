@@ -1,6 +1,13 @@
 SMODS.Atlas {
     key = "tb_joker",
-    path = sprite_path,
+    path = filename..".png",
+    px = 71,
+    py = 95
+}
+
+SMODS.Atlas {
+    key = "tb_joker_2",
+    path = filename.."_2.png",
     px = 71,
     py = 95
 }

@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Make Gros Michel flag our custom pool flag
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Gros Michel' then G.GAME.pool_flags.gros_michel_extinct = true end"
+position = "at"
+payload = '''
+if self.ability.name == 'Gros Michel' then
+    G.GAME.pool_flags.gros_michel_extinct = true
+    G.GAME.pool_flags.michel_in_pool = G.GAME.force_banana
+end
+G.GAME.bananas_destroyed = G.GAME.bananas_destroyed + 1
+'''
+match_indent = true
+
+
+# Change Gros Michel to use our custom flag instead of the vanilla one
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''j_gros_michel=      {order = 38,  unlocked = true,  discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = false, rarity = 1, cost = 5, name = "Gros Michel", pos = {x=7,y=6}, set = "Joker", effect = "", config = {extra = {odds = 6, mult = 15}}, no_pool_flag = 'gros_michel_extinct'},
+'''
+position = "at"
+payload = '''
+j_gros_michel=      {order = 38,  unlocked = true,  discovered = false, blueprint_compat = true, perishable_compat = true, eternal_compat = false, rarity = 1, cost = 5, name = "Gros Michel", pos = {x=7,y=6}, set = "Joker", effect = "", config = {extra = {odds = 6, mult = 15}}, yes_pool_flag = 'michel_in_pool'},
+'''
+match_indent = true
