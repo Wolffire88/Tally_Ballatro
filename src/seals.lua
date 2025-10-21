@@ -99,11 +99,9 @@ SMODS.Seal {
     end,
 
     calculate = function(self, card, context)
-        if context.individual then
-            print("we scorin it up over here")
+        if context.main_scoring and context.cardarea == G.play then
             --No need to check every other card if this one is a heart
             if card:is_suit('Hearts', false, nil) then
-                print("we are the heart")
                 return {
                     mult = card.ability.seal.extra.mult
                 }
@@ -112,7 +110,6 @@ SMODS.Seal {
             --But in case it isn't
             for _, pcard in ipairs(context.scoring_hand) do
                 if pcard:is_suit('Hearts', false, nil) then
-                    print("well there still is one")
                     return {
                         mult = card.ability.seal.extra.mult
                     }
