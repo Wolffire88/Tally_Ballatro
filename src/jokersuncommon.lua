@@ -569,7 +569,6 @@ SMODS.Joker {
         if card.debuff then return nil end
 
         if context.before and context.full_hand and not context.blueprint then
-            print("spade checkin")
             for _, pcard in ipairs(context.scoring_hand) do
                 if pcard:is_suit("Spades") and not pcard.debuff then
                     table.insert(card.ability.extra.spades, pcard)
@@ -577,11 +576,8 @@ SMODS.Joker {
             end
 
             if card.ability.extra.spades then 
-                print("spades found")
                 card.ability.extra.xmult = 1 + #card.ability.extra.spades * card.ability.extra.xmult_rate
             end
-
-            print(card.ability.extra.xmult)
         end
 
         if context.after and card.ability.extra.spades and not context.blueprint then
