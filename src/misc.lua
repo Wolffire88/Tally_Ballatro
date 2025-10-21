@@ -224,7 +224,7 @@ SMODS.Consumable {
         local c2_s = card2:get_seal()
 
         if c1_s == c2_s then
-            cardtable.seal = c1_en
+            cardtable.seal = c1_s
         elseif c1_s then
             if c2_s and (G.P_CENTERS[c2_s].order > G.P_CENTERS[c1_s].order) then
                 cardtable.seal = c2_s
