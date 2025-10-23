@@ -247,6 +247,7 @@ SMODS.Consumable {
         fusion.playing_card = G.playing_card
         table.insert(G.playing_cards, fusion)
         G.hand:emplace(fusion)
+        G.GAME.blind:debuff_card(fusion)
         fusion:add_to_deck()
 
         --Kill the main cards
