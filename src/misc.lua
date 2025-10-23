@@ -151,12 +151,7 @@ SMODS.Consumable {
     end,
 
     can_use = function(self, card)
-        local legal_select = true
-        if not (G.hand and #G.hand.cards > 0) then
-            legal_select = false
-        end
-
-        return legal_select 
+        return G.hand and #G.hand.cards > 0
     end
 }
 
