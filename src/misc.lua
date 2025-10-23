@@ -181,7 +181,7 @@ SMODS.Consumable {
         local card2 = G.hand.highlighted[2]
 
         local cardtable = {
-            set = "Playing Card",
+            set = "Base",
             area = G.hand,
             rank = card2.base.value,
             suit = card1.base.suit
