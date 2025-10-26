@@ -231,13 +231,25 @@ SMODS.Consumable {
         end
 
         --Additional stuff
-        nominal_chips = card1:get_chip_bonus() + card2:get_chip_bonus()
-        nominal_mult = card1:get_chip_mult() + card2:get_chip_mult()
+        nominal_chips = card1.ability.perma_bonus + card2.ability.perma_bonus
+        nominal_mult = card1.ability.perma_mult + card2.ability.perma_mult
+        nominal_xchips = card1.ability.perma_x_chips + card2.ability.perma_x_chips      -- These ones aren't used by tally mod and are here for cross compatibility
+        nominal_xmult = card1.ability.perma_x_mult + card2.ability.perma_x_mult
+        held_chips = card1.ability.perma_h_chips + card2.ability.perma_h_chips
+        held_mult = card1.ability.perma_h_mult + card2.ability.perma_h_mult
+        held_xchips = card1.ability.perma_h_x_chips + card2.ability.perma_h_x_chips
+        held_xmult = card1.ability.perma_h_x_mult + card2.ability.perma_h_x_mult
 
         --FUSION DANCE
         local fusion = SMODS.create_card(cardtable)
-        fusion.ability.perma_mult = nominal_mult
-        fusion.ability.perma_bonus = nominal_chips
+        fusion.ability.perma_mult = nominal_mult or 0
+        fusion.ability.perma_bonus = nominal_chips or 0
+        fusion.ability.perma_x_mult = nominal_xmult or 0
+        fusion.ability.perma_x_chips = nominal_xchips or 0
+        fusion.ability.perma_h_mult = held_mult or 0
+        fusion.ability.perma_h_chips = held_chips or 0
+        fusion.ability.perma_h_x_mult = held_xmult or 0
+        fusion.ability.perma_h_x_chips = held_xchips or 0
         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
         fusion.playing_card = G.playing_card
         table.insert(G.playing_cards, fusion)
@@ -313,7 +325,7 @@ SMODS.Consumable {
 
     use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({
-            trigger = 'after',
+            trigger = 'before',
             delay = 0.2,
             func = function()
                 local tie_card = G.hand.highlighted[1]
