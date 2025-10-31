@@ -141,13 +141,14 @@ TB.DreamJournal = {
 }
 
 --Add funny exponentation so we don't have to rely on Talisman, but don't do it if Talisman is already here.
-if not Talisman then
+if not next(SMODS.find_mod('Talisman')) then
     local calc = SMODS.calculate_individual_effect
     SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, from_edition)
         local default = calc(effect, scored_card, key, amount, from_edition)
         if default then return default end
 
         if key == "emult" and amount ~= 1 then
+            print("we didn't find talisman")
             if effect.card then juice_card(effect.card) end
 
             local mult = SMODS.Scoring_Parameters["mult"]
