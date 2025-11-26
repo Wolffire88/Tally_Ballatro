@@ -134,10 +134,10 @@ SMODS.Seal {
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
             card.ability.seal.extra.cards = {}
-            for i=1, #context.cardarea.cards do
-                if context.cardarea.cards[i] == card then
-                    table.insert(card.ability.seal.extra.cards, context.cardarea.cards[i-1])
-                    table.insert(card.ability.seal.extra.cards, context.cardarea.cards[i+1])
+            for i=1, #context.scoring_hand do
+                if context.scoring_hand[i] == card then
+                    table.insert(card.ability.seal.extra.cards, context.scoring_hand[i-1])
+                    table.insert(card.ability.seal.extra.cards, context.scoring_hand[i+1])
                 end
             end
 
