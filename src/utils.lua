@@ -86,7 +86,7 @@ TB.TIES = {
 TB.DreamJournal = {
     Ross = function(card, context)
         if context.before and context.scoring_name == card.ability.extra.poker_hand then
-            local randcard = pseudorandom_element(G.play.cards, 'DJ_tiecard')
+            local randcard = pseudorandom_element(context.scoring_hand, 'DJ_tiecard')
             randcard:set_seal(SMODS.poll_seal({ guaranteed = true, options = {"tb_graytie"} }))
             card:juice_up()
         end

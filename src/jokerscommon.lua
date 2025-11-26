@@ -65,7 +65,7 @@ SMODS.Joker{
         -- purple seal chance
         if context.before then
             if pseudorandom('tieseal') < G.GAME.probabilities.normal / card.ability.extra.seal_chance then
-                local rand_card = pseudorandom_element(G.play.cards, 'tieseal_card')
+                local rand_card = pseudorandom_element(context.scoring_hand, 'tieseal_card')
 
                 --Generate the actual purple seal
                 G.E_MANAGER:add_event(Event({
