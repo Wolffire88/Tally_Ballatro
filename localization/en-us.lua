@@ -44,8 +44,17 @@ return {
                 text = {
                     "Perminantly debuffs up to",
                     "{C:attention}#1#{} selected cards.",
-                    "Gain {C:money}money{} equal to double the total",
+                    "Gain {C:money}money{} equal to the total",
                     "chip value of debuffed cards."
+                }
+            },
+
+            c_tb_and = {
+                name = "&",
+                text = {
+                    "Create a {C:dark_edition}negative{} copy of",
+                    "one selected card in hand. {C:green}#1# in #2#{}",
+                    "chance to destroy the original card."
                 }
             }
         },
@@ -77,6 +86,16 @@ return {
                     "{C:attention}left card{} and the {C:hearts}rank{} of the {C:attention}right card{}.",
                     "{C:attention}Enhancements/Seals/Editions{} carry",
                     "over on a priority basis."
+                }
+            },
+
+            c_tb_lady = {
+                name = "The Lady",
+                text = {
+                    "Select up to {C:attention}#1#{} cards.",
+                    "Swaps all {C:hearts}red suits{} with",
+                    "its respective {C:spades}black suit{}, and",
+                    "vice versa. {C:inactive}(e.g. H -> S, D -> C, etc.){}"
                 }
             }
         },
@@ -262,7 +281,7 @@ return {
             j_tb_hiddeninthesand = {
                 name = "Hidden in the Sand",
                 text = {
-                    "Destroy {C:attention}1{} random card in hand and add its",
+                    "Destroy {C:attention}1{} random card in hand and add {C:attention}half{} its",
                     "{C:attention}rank{} to this joker's mult {C:inactive}(currently {C:mult}+#1#{C:inactive}){}",
                     "{C:inactive}(Aces count as {C:attention}1{C:inactive}, face cards count as {C:attention}10{C:inactive}){}"
                 }
@@ -280,7 +299,8 @@ return {
             j_tb_rulerofeverything = {
                 name = "The Ruler of Everything",
                 text = {
-                    "All unscored cards become {C:dark_edition}zirconium{}."
+                    "{C:green}#1# in #2#{} chance for unscored",
+                    "cards to become {C:dark_edition}zirconium{}."
                 }
             },
 
@@ -318,11 +338,19 @@ return {
             j_tb_tapes = {
                 name = "Tapes",
                 text = {
-                    "Destroy all unscored cards",
+                    "Destroy all unscored cards.",
                     "Apply a random {C:attention}Tie{} to",
-                    "a card in hand {C:attention}per{}",
-                    "destroyed card.",
+                    "a {C:attention}random card{} in hand.",
                     "{C:inactive,S:0.8}(Will not overwrite other seals/ties){}"
+                }
+            },
+
+            j_tb_lightsout = {
+                name = "Turn the Lights Off",
+                text = {
+                    "{X:chips,C:white}x#1#{} chips per negative",
+                    "card in full deck.",
+                    "{C:inactive}(currently {X:chips,C:white}x#2#{C:inactive} chips)"
                 }
             },
 
@@ -377,6 +405,24 @@ return {
                     "Cycles between {C:attention}5{} different",
                     "effects.",
                     "{C:inactive}(Changes every round){}"
+                }
+            },
+
+            j_tb_stars = {
+                name = "Fate of the Stars",
+                text = {
+                    "One random card {C:attention}held in hand{} becomes",
+                    "{C:dark_edition}negative{} when a {C:attention}non-standard{}",
+                    "poker hand is played.",
+                    "{C:inactive}(Does not overwrite other editions)"
+                }
+            },
+
+            j_tb_mindelectric = {
+                name = "The Mind Electric",
+                text = {
+                    "All scoring cards score {C:attention}right to left{},",
+                    "and then score {C:attention}again{} normally."
                 }
             },
 

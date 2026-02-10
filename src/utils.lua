@@ -31,6 +31,23 @@ TB.is_in_table = function(table, item)
     return false
 end
 
+TB.reverse_table = function(tb)
+    if not tb then return nil end
+
+    for i = 1, math.floor(#tb/2), 1 do
+        tb[i], tb[#tb - i + 1] = tb[#tb - i + 1], tb[i]
+    end
+end
+
+TB.concat_tables = function(t1, t2)
+    t_copy = {}
+    TB.copy_table(t1, t_copy)
+    for _, v in ipairs(t2) do
+        t_copy[#t_copy + 1] = v
+    end
+    return t_copy
+end
+
 --Blueprint but complicated
 TB.federman_effect = function(card, j1, j2, context)
     -- Federman cannot copy itself or it ends the universe
@@ -79,8 +96,20 @@ TB.TIES = {
     "tb_greentie",
     "tb_bluetie",
     "tb_graytie",
-    --"tb_blacktie",
     "tb_orangetie"
+}
+
+--List of standard poker hands
+TB.POKERHANDS = {
+    "Straight Flush",
+    "Four of a Kind",
+    "Full House",
+    "Flush",
+    "Straight",
+    "Three of a Kind",
+    "Two Pair",
+    "Pair",
+    "High Card"
 }
 
 TB.DreamJournal = {
@@ -148,7 +177,6 @@ if not next(SMODS.find_mod('Talisman')) then
         if default then return default end
 
         if key == "emult" and amount ~= 1 then
-            print("we didn't find talisman")
             if effect.card then juice_card(effect.card) end
 
             local mult = SMODS.Scoring_Parameters["mult"]
@@ -187,4 +215,23 @@ if not next(SMODS.find_mod('Talisman')) then
     for _, v in ipairs({"echips", "emult"}) do
         table.insert(SMODS.scoring_parameter_keys or SMODS.calculation_keys, v)
     end
+end
+
+-- The Mind Electric compatability
+local calc_main = SMODS.calculate_main_scoring
+SMODS.calculate_main_scoring = function(context, scoring_hand)
+    if next(find_joker('The Mind Electric')) and scoring_hand and context.cardarea.cards then
+        TB.reverse_table(context.cardarea.cards)
+
+        preserve = context.cardarea
+        calc_main(context, scoring_hand)
+
+        if context.cardarea == "unscored" then  --I don't know why it does this
+            context.cardarea = preserve         --this undoes it
+        end
+
+        TB.reverse_table(context.cardarea.cards)
+    end
+    
+    calc_main(context, scoring_hand)
 end

@@ -20,6 +20,8 @@ assert(SMODS.load_file("src/jokersrare.lua"))()
 assert(SMODS.load_file("src/jokerslegendary.lua"))()
 
 -- Consumables + Editions/Enchancements
+assert(SMODS.load_file("src/spectrals.lua"))()
+assert(SMODS.load_file("src/tarots.lua"))()
 assert(SMODS.load_file("src/misc.lua"))()
 
 -- Seals

@@ -128,15 +128,21 @@ SMODS.Joker {
 
         if context.joker_main then
             local get_smallest = function(hand)
-                local sort = {}
+                local smallest = hand[1]
                 for idx, pcard in ipairs(hand) do
-                    sort[idx] = pcard
+                    smallest = smallest:get_id() < pcard:get_id() and smallest or pcard
                 end
-                table.sort(sort, function(i, j) return i:get_id() < j:get_id() end)
-                return sort[1]
+                return smallest
             end
 
-            local lowest_rank = get_smallest(context.scoring_hand)
+            local legal_cards = {}
+            for _, v in ipairs(context.scoring_hand) do
+                if not v.has_no_rank then
+                    table.insert(legal_cards, v)
+                end
+            end
+
+            local lowest_rank = get_smallest(legal_cards)
             local rank_chips = lowest_rank:get_chip_bonus()
 
             if not lowest_rank.debuff then
@@ -209,7 +215,7 @@ SMODS.Joker {
 SMODS.Joker {
     key = "miraclemusical",
     name = "Miracle Musical",
-    config = { extra = { xmult = 1, xmult_increase = 0.25, retriggers = 1 } },
+    config = { extra = { repetitions = 1, xmult = 1, xmult_scale = 0.25 } },
     pos = {
         x = 6,
         y = 2
@@ -226,18 +232,19 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_polychrome
-        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_increase } }
+        return { vars = { card.ability.extra.xmult, card.ability.extra.xmult_scale } }
     end,
     
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        if context.repetition and context.other_card.edition and context.other_card.edition.polychrome and not context.other_card.debuff then
-            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase
-
-            return {
-                repetitions = card.ability.extra.retriggers
-            }
+        if context.individual and context.cardarea == G.play and context.repetition then
+            if context.other_card.edition and context.other_card.edition.polychrome then
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_scale
+                return {
+                    repetitions = card.ability.extra.repetitions
+                }
+            end
         end
 
         if context.joker_main then
@@ -245,6 +252,16 @@ SMODS.Joker {
                 xmult = card.ability.extra.xmult
             }
         end
+    end,
+
+    in_pool = function(self, args)
+        for _, card in ipairs(G.playing_cards) do
+            if card.edition and card.edition.polychrome then
+                return true
+            end
+        end
+
+        return false
     end
 }
 
@@ -363,12 +380,19 @@ SMODS.Joker {
         if card.debuff then return nil end
 
         if context.before and not context.blueprint then
-            local rand_card = pseudorandom_element(G.hand.cards, 'HITS')
+            --remove invalid cards from selection
+            local trimmedhand = {}
+            for _, hcard in ipairs(G.hand.cards) do
+                if not SMODS.has_no_rank(hcard) and not hcard.debuff then
+                    table.insert(trimmedhand, hcard)
+                end
+            end
 
-            if not rand_card or SMODS.has_no_rank(rand_card) then return end
+            --Select a random valid card in hand to be destroyed
+            local rand_card = pseudorandom_element(trimmedhand, 'HITS')
 
-            if not rand_card.debuff then
-                card.ability.extra.mult = card.ability.extra.mult + TB.id_to_rank(rand_card:get_id())
+            if rand_card then
+                card.ability.extra.mult = card.ability.extra.mult + (TB.id_to_rank(rand_card:get_id())/2)
 
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
@@ -382,12 +406,6 @@ SMODS.Joker {
 
                 return {
                     message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
-                    colour = G.C.RED
-                }
-            else
-                return {
-                    message = localize('k_debuffed'),
-                    message_card = rand_card,
                     colour = G.C.RED
                 }
             end
@@ -446,7 +464,7 @@ SMODS.Joker {
 SMODS.Joker {
     key = "rulerofeverything",
     name = "The Ruler of Everything",
-    config = { extra = { odds = 3 } },
+    config = { extra = { odds = 2 } },
     pos = {
         x = 4,
         y = 2
@@ -469,11 +487,11 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if card.debuff then return nil end
 
-        if context.joker_main and G.GAME.probabilities.normal/card.ability.extra.odds then
+        if context.joker_main then
             local unscored = {}
 
             for _, pcard in ipairs(context.full_hand) do
-                if not TB.is_in_table(context.scoring_hand, pcard) then
+                if not TB.is_in_table(context.scoring_hand, pcard) and pseudorandom('ruler') < G.GAME.probabilities.normal/card.ability.extra.odds then
                     table.insert(unscored, pcard)
                 end
             end
@@ -591,6 +609,16 @@ SMODS.Joker {
                 xmult = card.ability.extra.xmult
             }
         end
+    end,
+
+    in_pool = function(self, args)
+        for _, card in ipairs(G.playing_cards) do
+            if card:is_suit("Spades") then
+                return true
+            end
+        end
+
+        return false
     end
 }
 
@@ -694,32 +722,106 @@ SMODS.Joker {
     calculate = function(self, card, context)   
         if card.debuff or context.blueprint then return nil end
 
-        if context.before and G.hand then
+        if context.before then
             local unscored = {}
 
+            -- Grab all unscored cards
             for _, pcard in ipairs(context.full_hand) do
                 if not TB.is_in_table(context.scoring_hand, pcard) then
                     table.insert(unscored, pcard)
                 end
             end
 
-            local num_cards = #unscored
             SMODS.destroy_cards(unscored, nil, true)
 
+            -- Trim cards in hand of all cards with seals
             local hand_copy = {}
-            TB.copy_table(G.hand.cards, hand_copy)
+            TB.copy_table(G.hand.cards, hand_copy)  -- work with a copy to not mess with the actual hand
 
-            for i=1, num_cards, 1 do
-                if hand_copy then
-                    local tie_card = table.remove(hand_copy, math.random(#hand_copy))
+            for hval, hkey in ipairs(hand_copy) do
+                if hkey:get_seal() then
+                    table.remove(hand_copy, hval)
+                end
+            end
 
-                    if tie_card and not tie_card:get_seal() then
-                        tie_card:set_seal(SMODS.poll_seal( { key = 'tieseal', guaranteed = true, options = TB.TIES} ))
-                    else
-                        i = i - 1 --go back because invalid card
+            -- Place a seal on a random card if there were unscored cards.
+            if #unscored > 0 then
+                G.E_MANAGER:add_event(Event({
+                    trigger = "before",
+                    delay = 0.3,
+                    func = function()
+                        local _tiecard = pseudorandom_element(hand_copy, "kill")
+                        _tiecard:set_seal(SMODS.poll_seal({ key = "randtie", guaranteed = true, options = TB.TIES }), nil, true)
+                        _tiecard:juice_up()
+                        card:juice_up()
+                        play_sound('tarot1')
+                        return true
                     end
+                }))
+            end
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "lightsout",
+    name = "Turn the Lights Off",
+    config = { extra = { xchips_increase = 0.5 } },
+    pos = {
+        x = 4,
+        y = 2
+    },
+    rarity = 2,
+    cost = 6,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker_2",
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+
+        neg_count = 0
+
+        if G.playing_cards then
+            for _, dcard in ipairs(G.playing_cards) do
+                if dcard.edition and dcard.edition.negative then
+                    neg_count = neg_count + 1
                 end
             end
         end
+
+        return { vars = { card.ability.extra.xchips_increase, G.deck and 1 + card.ability.extra.xchips_increase * neg_count or 1} }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.joker_main then
+            local neg_count = 0
+
+            for _, dcard in ipairs(G.playing_cards) do
+                if dcard.edition and dcard.edition.negative then
+                    neg_count = neg_count + 1
+                end
+            end
+
+            return {
+                xchips = 1 + card.ability.extra.xchips_increase * neg_count
+            }
+        end
+    end,
+
+    in_pool = function(self, args)
+        for _, dcard in ipairs(G.playing_cards or {}) do    -- Only show up if there's a negative edition card.
+            if dcard.edition and dcard.edition.negative then
+                return true
+            end
+        end
+
+        return false
     end
 }

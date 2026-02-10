@@ -315,6 +315,16 @@ SMODS.Joker {
                 }
             end
         end
+    end,
+
+    in_pool = function(self, args)
+        for _, card in ipairs(G.playing_cards) do
+            if card.edition and card.edition.tb_zirconium then
+                return true
+            end
+        end
+
+        return false
     end
 }
 
@@ -451,6 +461,18 @@ SMODS.Joker {
                 xchips = card.ability.extra.xchips
             }
         end
+    end,
+
+    in_pool = function(self, args)
+        stone_count = 0
+
+        for _, card in ipairs(G.playing_cards) do
+            if SMODS.has_enhancement(card, 'm_stone') then
+                stone_count = stone_count + 1
+            end
+        end
+
+        return stone_count >= 2
     end
 }
 
@@ -767,7 +789,7 @@ SMODS.Joker {
 SMODS.Joker {
     key = "bananaman",
     name = "The Banana Man",
-    config = { extra = { xmult = 1, xmult_increase = 0.5, odds = 5 } },
+    config = { extra = { xmult = 1, xmult_increase = 0.5, cavendish_increase = 5, odds = 5 } },
     pos = {
         x = 2,
         y = 0
@@ -788,7 +810,8 @@ SMODS.Joker {
         return {
             vars = {
                 card.ability.extra.xmult_increase,
-                card.ability.extra.xmult + (G.GAME and G.GAME.bananas_destroyed or 0) * card.ability.extra.xmult_increase,
+                card.ability.extra.xmult + (G.GAME and G.GAME.bananas_destroyed or 0) * card.ability.extra.xmult_increase 
+                + (G.GAME and G.GAME.cavendish_destroyed or 0) * card.ability.extra.cavendish_increase,
                 G.GAME and G.GAME.probabilities.normal or 1,
                 card.ability.extra.odds,
             }
@@ -821,6 +844,15 @@ SMODS.Joker {
                         return true
                     end
                 }))
+            end
+        end
+
+        --Check for banana death, only for displaying an upgrade message
+        if context.joker_type_destroyed then
+            if context.card.config.center.name == 'Gros Michel' or context.card.config.center.name == 'Cavendish' then
+                return {
+                    message = localize('k_upgrade_ex')
+                }
             end
         end
 

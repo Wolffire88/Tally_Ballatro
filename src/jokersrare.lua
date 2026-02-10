@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = "hawaiitwo",
     name = "Hawaii Pt.2",
-    config = { extra = { xmult = 1, xmult_increase = 0.5 } },
+    config = { extra = { xmult = 1, xmult_increase = 0.25 } },
     pos = {
         x = 0,
         y = 2
@@ -25,10 +25,24 @@ SMODS.Joker {
 
         if not context.blueprint then
             local num_queens = 0
+
+            -- Remove all queens from the scoring hand
+            if context.modify_scoring_hand then
+                if not context.other_card.debuff and context.other_card:get_id() == 12 then
+                    context.other_card.to_destroy = true
+                    return {
+                        remove_from_hand = true
+                    }
+                end
+            end
+
+            -- Count and destroy all queens marked for destruction, then upgrade the joker
             if context.before then
-                for _, pcard in ipairs(context.scoring_hand) do
-                    if not pcard.debuff and pcard:get_id() == 12 then
+                for _, pcard in ipairs(context.full_hand) do
+                    if pcard.to_destroy then
+                        pcard.to_destroy = nil
                         num_queens = num_queens + 1
+                        SMODS.destroy_cards(pcard, nil, true)
                     end
                 end
 
@@ -42,14 +56,6 @@ SMODS.Joker {
                     }
                 end
             end 
-
-            if context.destroy_card and context.cardarea == G.play then
-                if context.destroy_card:get_id() == 12 and not context.destroy_card.debuff then
-                    return {
-                        remove = true
-                    } 
-                end
-            end
         end
 
         if context.joker_main then
@@ -57,6 +63,16 @@ SMODS.Joker {
                 xmult = card.ability.extra.xmult
             }
         end
+    end,
+
+    in_pool = function(self, args)
+        for _, card in ipairs(G.playing_cards) do
+            if card:get_id() == 12 then
+                return true
+            end
+        end
+
+        return false
     end
 }
 
@@ -209,6 +225,18 @@ SMODS.Joker {
             }
         end
         
+    end,
+
+    in_pool = function(self, args)
+        queen_count = 0
+
+        for _, card in ipairs(G.playing_cards) do
+            if card:get_id() == 12 then
+                queen_count = queen_count + 1
+            end
+        end
+
+        return queen_count >= 2
     end
 }
 
@@ -461,5 +489,87 @@ SMODS.Joker {
 
     set_ability = function(self, card, initial, delay_sprites)
         card.ability.extra.dream_effect = math.floor((pseudorandom('dreamjournal') * 5) + 1)
+    end
+}
+
+SMODS.Joker {
+    key = "stars",
+    name = "Fate of the Stars",
+    config = {},
+    pos = {
+        x = 4,
+        y = 1
+    },
+    rarity = 3,
+    cost = 8,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker_2",
+
+    loc_vars = function(self, info_queue, card) 
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff or context.blueprint then return nil end
+
+        if context.before then
+            if not TB.is_in_table(TB.POKERHANDS, context.scoring_name) then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    delay = 0.3,
+                    func = function()
+                        card:juice_up()
+                        return true
+                    end
+                }))
+
+                editionless = {}
+                for _, hcard in ipairs(G.hand.cards) do
+                    if not hcard.edition then
+                        table.insert(editionless, hcard)
+                    end
+                end
+
+                to_edition = pseudorandom_element(editionless, "fatedstars")
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    delay = 0.3,
+                    func = function()
+                        if to_edition then
+                            to_edition:set_edition("e_negative", true)
+                        end
+                        return true
+                    end
+                }))
+            end
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "mindelectric",
+    name = "The Mind Electric",
+    config = {},
+    pos = {
+        x = 4,
+        y = 0
+    },
+    rarity = 3,
+    cost = 10,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker_2",
+
+    calculate = function(self, card, context)
+        if nil then print("lmao this card fucking sucks") end   --comment with extra steps amirite chat?
     end
 }
