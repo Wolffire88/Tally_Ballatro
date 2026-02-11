@@ -215,7 +215,7 @@ return {
                 name = "The Banana Man",
                 text = {
                     "Reintroduces {C:attention}Gros Michel{} to",
-                    "the joker pool. {C:green}#3# in #4#{}",
+                    "the joker pool. {C:green}#3# in #4#{} chance",
                     "for all added jokers to turn",
                     "into {C:attention}Gros Michel{}. This joker",
                     "gains {X:mult,C:white}x#1#{} mult per banana",
