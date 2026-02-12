@@ -139,8 +139,8 @@ TB.DreamJournal = {
     end,
 
     Andrew = function(card, context)
-        if context.before and context.cardarea == G.jokers and G.play.cards then
-            card.ability.extra.randcard = pseudorandom_element(G.play.cards, "DJ_andrew")
+        if context.before and context.cardarea == G.jokers and context.scoring_hand then
+            card.ability.extra.randcard = pseudorandom_element(context.scoring_hand, "DJ_andrew")
 
             card.ability.extra.randcard.ability.perma_mult = card.ability.extra.randcard.ability.perma_mult or 0
             card.ability.extra.randcard.ability.perma_mult = card.ability.extra.randcard.ability.perma_mult + card.ability.extra.permamult
