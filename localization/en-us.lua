@@ -650,7 +650,8 @@ return {
             k_hiatus    = "On Hiatus!",
             k_left_ex   = "Left the band!",
             k_trance    = "Put in a trance!",
-            k_zirconium = "Zirconium!"
+            k_zirconium = "Zirconium!",
+            k_bora      = "Bora!"
         },
 
         v_dictionary = {

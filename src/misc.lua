@@ -8,6 +8,11 @@ SMODS.Sound {
     path = "e_zirconium.ogg"
 }
 
+SMODS.Sound {
+    key = "fifteen_seconds_of_bora",
+    path = "boraintro.ogg"
+}
+
 SMODS.Enhancement {
     key = "mechanical",
     config = { x_mult = 1, extra = { xmult_increase = 0.1 } },

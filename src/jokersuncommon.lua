@@ -87,8 +87,12 @@ SMODS.Joker {
         end
 
         if context.joker_main and G.GAME.current_round.hands_played == 0 and card.ability.extra.is_active then
+            --play_sound("tb_fifteen_seconds_of_bora")
             return {
-                xmult = card.ability.extra.xmult
+                xmult = card.ability.extra.xmult,
+                message = localize("k_bora"),
+                sound = "tb_fifteen_seconds_of_bora",
+                pitch = 1
             }
         end
 
@@ -510,7 +514,7 @@ SMODS.Joker {
             if unscored then
                 return {
                     message = localize('k_zirconium'),
-                    coloug = G.C.FILTER
+                    colour = G.C.CHIPS
                 }
             end
         end
