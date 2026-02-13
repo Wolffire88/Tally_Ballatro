@@ -18,7 +18,15 @@ SMODS.Consumable {
 
     use = function(self, card, area, copier)
         if pseudorandom('egocentric') < G.GAME.probabilities.normal / card.ability.destroy_odds then
-            SMODS.destroy_cards(G.hand.highlighted[1])
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.3,
+                func = function()
+                    SMODS.destroy_cards(G.hand.highlighted[1])
+                    return true
+                end
+            }))
+            
             return nil
         end
 
@@ -119,8 +127,16 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local dollars = 0
         for _, sacrifice in ipairs(G.hand.highlighted) do
-            SMODS.debuff_card(sacrifice, true, "tb_hiatus")
-            dollars = dollars + sacrifice:get_chip_bonus()
+            G.E_MANAGER:add_card(Event({
+                trigger = "after",
+                delay = 0.3,
+                func = function()
+                    SMODS.debuff_card(sacrifice, true, "tb_hiatus")
+                    dollars = dollars + sacrifice:get_chip_bonus()
+                    return true
+                end
+            }))
+            
         end
 
         delay(0.5)
@@ -182,17 +198,31 @@ SMODS.Consumable {
     end,
 
     use = function(self, card, area, copier)
-        local tocopy = copy_card(G.hand.highlighted[1], nil, nil, G.playing_card)
-        tocopy:set_edition('e_negative', true)
-        tocopy:add_to_deck()
-        G.deck.config.card_limit = G.deck.config.card_limit + 1
-        table.insert(G.playing_cards, tocopy)
-        G.hand:emplace(tocopy)
-        tocopy:start_materialize()
-        SMODS.calculate_context({ playing_card_added = true, cards = { tocopy } })
+        G.E_MANAGER:add_event(Event({
+            trigger = "after",
+            delay = 0.3,
+            func = function()
+                local tocopy = copy_card(G.hand.highlighted[1], nil, nil, G.playing_card)
+                tocopy:set_edition('e_negative', true)
+                tocopy:add_to_deck()
+                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                table.insert(G.playing_cards, tocopy)
+                G.hand:emplace(tocopy)
+                tocopy:start_materialize()
+                SMODS.calculate_context({ playing_card_added = true, cards = { tocopy } })
+                return true
+            end
+        }))
 
         if pseudorandom('&') < G.GAME.probabilities.normal / card.ability.destroy_odds then
-            SMODS.destroy_cards(G.hand.highlighted[1])
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.3,
+                func = function()
+                    SMODS.destroy_cards(G.hand.highlighted[1])
+                    return true
+                end
+            }))
         end
 
         delay(0.5)

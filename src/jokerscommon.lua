@@ -550,7 +550,7 @@ SMODS.Joker {
         y = 1
     },
     rarity = 1,
-    cost = 4,
+    cost = 6,
     blueprint_compat = true,
     eternal_compat = false,
     unlocked = true,
@@ -720,9 +720,16 @@ SMODS.Joker {
             end
 
             if queen_count == 2 and king_card then
-                local enhancement = SMODS.poll_enhancement( { guaranteed = true } )
-                king_card:set_ability(G.P_CENTERS[enhancement], true, false)
-                card:juice_up()
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.3,
+                    func = function()
+                        local enhancement = SMODS.poll_enhancement( { guaranteed = true } )
+                        king_card:set_ability(G.P_CENTERS[enhancement], true, false)
+                        card:juice_up()
+                        return true
+                    end
+                }))
             end
         end
 

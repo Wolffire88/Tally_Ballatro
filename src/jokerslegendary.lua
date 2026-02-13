@@ -197,7 +197,14 @@ SMODS.Joker {
 
 
             if tag_to_add then
-                add_tag(tag_to_add)
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.3,
+                    func = function()
+                        add_tag(tag_to_add)
+                        return true
+                    end
+                }))
             end
         end
     end
@@ -344,7 +351,6 @@ SMODS.Joker {
     unlocked = false,
     discovered = false,
     effect = nil,
-    soul_pos = nil,
     soul_pos = {
         x = 1,
         y = 2
@@ -388,7 +394,6 @@ SMODS.Joker {
     unlocked = false,
     discovered = false,
     effect = nil,
-    soul_pos = nil,
     soul_pos = {
         x = 3,
         y = 2
@@ -420,15 +425,29 @@ SMODS.Joker {
 
         if context.selling_self and card.ability.extra.rounds_left == 0 then
             if #G.jokers.cards <= G.jokers.config.card_limit then
-                local legendary_card = create_card("Joker", G.jokers, true)
-                G.jokers:emplace(legendary_card)
-                legendary_card:add_to_deck()
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.3,
+                    func = function()
+                        local legendary_card = create_card("Joker", G.jokers, true)
+                        G.jokers:emplace(legendary_card)
+                        legendary_card:add_to_deck()
+                        return true
+                    end
+                }))
             end
 
             if #G.jokers.cards <= G.jokers.config.card_limit and pseudorandom('shea_return') < G.GAME.probabilities.normal / card.ability.extra.odds then
-                local shea_copy = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_tb_shea")
-                G.jokers:emplace(shea_copy)
-                shea_copy:add_to_deck()
+                G.E_MANAGER:add_event(Event({
+                    trigger = after,
+                    delay = 0.3,
+                    func = function()
+                        local shea_copy = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_tb_shea")
+                        G.jokers:emplace(shea_copy)
+                        shea_copy:add_to_deck()
+                        return true
+                    end
+                }))
             end
         end
     end

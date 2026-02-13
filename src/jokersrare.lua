@@ -537,7 +537,7 @@ SMODS.Joker {
 
                 to_edition = pseudorandom_element(editionless, "fatedstars")
                 G.E_MANAGER:add_event(Event({
-                    trigger = 'before',
+                    trigger = 'after',
                     delay = 0.3,
                     func = function()
                         if to_edition then

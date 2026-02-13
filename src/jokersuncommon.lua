@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = "mechanicalmuseum",
-    name = "Mechanical Museum",
+    name = "Marvin's Marvelous Mechanical Museum",
     config = {},
     pos = {
         x = 3,
@@ -34,9 +34,10 @@ SMODS.Joker {
             end
 
             if highest_rank and not SMODS.has_enhancement(highest_rank, 'm_tb_mechanical') then
-                highest_rank:set_ability('m_tb_mechanical', nil, true)
-
+                highest_rank:set_ability('m_tb_mechanical', nil, true) 
                 G.E_MANAGER:add_event(Event({
+                    trigger = "before",
+                    delay = 0.3,
                     func = function()
                         play_sound('tarot1')
                         highest_rank:juice_up()
@@ -184,7 +185,12 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card)
         local ross_suit = G.GAME.current_round.ross_suit or { suit = 'Spades' }
-        return { vars = { localize(ross_suit.suit, 'suits_singular'), card.ability.extra.xchips_increase, card.ability.extra.xchips, colours = { G.C.SUITS[ross_suit.suit] } } }
+        return { vars = { 
+            localize(ross_suit.suit, 'suits_singular'), 
+            card.ability.extra.xchips_increase, 
+            card.ability.extra.xchips, 
+            colours = { G.C.SUITS[ross_suit.suit]}
+        }}
     end,
 
     calculate = function(self, card, context)
@@ -751,7 +757,7 @@ SMODS.Joker {
             -- Place a seal on a random card if there were unscored cards.
             if #unscored > 0 then
                 G.E_MANAGER:add_event(Event({
-                    trigger = "before",
+                    trigger = "after",
                     delay = 0.3,
                     func = function()
                         local _tiecard = pseudorandom_element(hand_copy, "kill")
