@@ -86,7 +86,7 @@ SMODS.Joker {
         y = 3
     },
     rarity = 3,
-    cost = 8,
+    cost = 9,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -138,7 +138,7 @@ SMODS.Joker {
         y = 3
     },
     rarity = 3,
-    cost = 9,
+    cost = 8,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -249,7 +249,7 @@ SMODS.Joker {
         y = 4
     },
     rarity = 3,
-    cost = 11,
+    cost = 12,
     blueprint_compat = true,
     eternal_compat = false,
     unlocked = true,
@@ -351,7 +351,7 @@ SMODS.Joker {
         y = 1
     },
     rarity = 3,
-    cost = 9,
+    cost = 8,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
