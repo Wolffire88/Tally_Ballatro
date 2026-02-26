@@ -180,7 +180,7 @@ return {
                 text = {
                     "{C:chips}#1#{} chips and {C:mult}#3#{} mult. This joker",
                     "loses {C:chips}-#2#{} chips for every card played",
-                    "hand, and {C:mult}-#4#{} mult for every discard used."
+                    "hand, and {C:mult}-#4#{} mult for every card discarded."
                 }
             },
 
