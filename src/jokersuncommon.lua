@@ -302,25 +302,18 @@ SMODS.Joker {
         if card.debuff then return nil end
 
         if context.individual and context.cardarea == G.play then
-            local rasin_card = nil
-            local temp_rank = 15
+            local rasin_rank = 15
             for _, pcard in ipairs(context.scoring_hand) do
                 if temp_rank > pcard:get_id() and not SMODS.has_no_rank(pcard) then
-                    temp_rank = pcard:get_id()
-                    rasin_card = pcard
+                    rasin_rank = pcard:get_id()
                 end
             end
             
-            if rasin_card == context.other_card then
-                if context.other_card.debuff then
-                    return {
-                        message = localize('k_debuffed'),
-                        colour = G.C.RED
-                    }
-
-                else
+            if rasin_rank == context.other_card:get_id() then
+                if not context.other_card.debuff then
                     return {
                         xmult = card.ability.extra.xmult
+                        message.card = context.other_card
                     }
                 end
             end
