@@ -312,8 +312,8 @@ SMODS.Joker {
             if rasin_rank == context.other_card:get_id() then
                 if not context.other_card.debuff then
                     return {
-                        xmult = card.ability.extra.xmult
-                        message.card = context.other_card
+                        xmult = card.ability.extra.xmult,
+                        message_card = context.other_card
                     }
                 end
             end
