@@ -17,6 +17,15 @@ return {
                     "Increases by {X:mult,C:white}X#2#{}",
                     "when held in hand"
                 }
+            },
+
+            m_tb_blossom = {
+                name = "Blossom",
+                text = {
+                    "This card gains {X:chips,C:white}X#2#{} chips for",
+                    "every other {C:attention}blossom card{} in full",
+                    "deck (currently {X:chips,C:white}X#1#{} chips)."
+                }
             }
         },
 
@@ -56,6 +65,14 @@ return {
                     "one selected card in hand. {C:green}#1# in #2#{}",
                     "chance to destroy the original card."
                 }
+            },
+
+            c_tb_storm = {
+                name = "Storm",
+                text = {
+                    "Duplicate all held in",
+                    "hand {C:attention}Blossom cards{}."
+                }
             }
         },
 
@@ -64,7 +81,7 @@ return {
                 name = "Cog",
                 text = {
                     "Enhances {C:attention}#1#{} selected card",
-                    "to a {C:attention}#2#{}"
+                    "to a {C:attention}#2#{}."
                 }
             },
 
@@ -96,6 +113,14 @@ return {
                     "Swaps all {C:hearts}red suits{} with",
                     "its respective {C:spades}black suit{}, and",
                     "vice versa. {C:inactive}(e.g. H -> S, D -> C, etc.){}"
+                }
+            },
+
+            c_tb_spring = {
+                name = "Spring",
+                text = {
+                    "Enhances {C:attention}#1#{} selected cards",
+                    "into a {C:attention}#2# card{}."
                 }
             }
         },
