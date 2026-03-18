@@ -243,3 +243,50 @@ SMODS.Consumable {
         end
     end
 }
+
+SMODS.Consumable {
+    key = "storm",
+    set = "Spectral",
+    pos = {
+        x = 4,
+        y = 2
+    },
+    unlocked = true,
+    discovered = false,
+    atlas = "tb_consum",
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_tb_blossom
+    end,
+
+    can_use = function(self, card)
+        return G.hand and #G.hand.cards > 1
+    end,
+
+    use = function(self, card, area, copier)
+        for _, hcard in ipairs(G.hand.cards) do
+            if SMODS.has_enhancement(hcard, 'm_tb_blossom') then
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.3,
+                    func = function()
+                        local tocopy = copy_card(hcard, nil, nil, G.playing_card)
+                        tocopy:add_to_deck()
+                        G.deck.config.card_limit = G.deck.config.card_limit + 1
+                        table.insert(G.playing_cards, tocopy)
+                        G.hand:emplace(tocopy)
+                        tocopy:start_materialize()
+                        SMODS.calculate_context({ playing_card_added = true, cards = { tocopy } })
+                        return true
+                    end
+                }))
+            end
+        end
+    end,
+
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
+            card.children.center:draw_shader('booster', nil, card.ARGS.send_to_shader)
+        end
+    end
+}
