@@ -23,7 +23,7 @@ SMODS.Enhancement {
     unlocked = true,
     discovered = false,
     replace_base_card = false,
-    atlas = "mechanical",
+    atlas = "enhancer",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.x_mult, card.ability.extra.xmult_increase } }
@@ -45,6 +45,37 @@ SMODS.Enhancement {
             end
         end
     end
+}
+
+SMODS.Enhancement {
+    key = "blossom",
+    config = { x_chips = 1, extra = { xchip_increase = 0.05 } },
+    pos = {
+        x = 1,
+        y = 0
+    },
+    unlocked = true,
+    discovered = false,
+    replace_base_card = false,
+    atlas = "enhancer",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.x_chips, card.ability.extra.xchip_increase } }
+    end,
+
+    update = function(self, card, dt)
+        xchip = 1
+        for _, plcard in ipairs(G.playing_cards) do
+            if SMODS.has_enhancement(plcard, 'm_tb_blossom') and plcard ~= card then
+                xchip = xchip + plcard.ability.extra.xchip_increase
+            end
+        end
+
+        if xchip >= 1 then
+            card.ability.x_chips = xchip
+        end
+    end
+
 }
 
 SMODS.Edition {

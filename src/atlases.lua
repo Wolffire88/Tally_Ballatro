@@ -27,8 +27,8 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = "mechanical",
-    path = "mechanical.png",
+    key = "enhancer",
+    path = "enhancements.png",
     px = 71,
     py = 95
 }
