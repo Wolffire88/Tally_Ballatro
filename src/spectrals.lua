@@ -127,16 +127,8 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
         local dollars = 0
         for _, sacrifice in ipairs(G.hand.highlighted) do
-            G.E_MANAGER:add_card(Event({
-                trigger = "after",
-                delay = 0.3,
-                func = function()
-                    SMODS.debuff_card(sacrifice, true, "tb_hiatus")
-                    dollars = dollars + sacrifice:get_chip_bonus()
-                    return true
-                end
-            }))
-            
+            SMODS.debuff_card(sacrifice, true, "tb_hiatus")
+            dollars = dollars + sacrifice:get_chip_bonus()
         end
 
         delay(0.5)
