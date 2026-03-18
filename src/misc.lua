@@ -21,7 +21,7 @@ SMODS.Enhancement {
         y = 0
     },
     unlocked = true,
-    discovered = false,
+    discovered = true,
     replace_base_card = false,
     atlas = "enhancer",
 
@@ -55,7 +55,7 @@ SMODS.Enhancement {
         y = 0
     },
     unlocked = true,
-    discovered = false,
+    discovered = true,
     replace_base_card = false,
     atlas = "enhancer",
 
@@ -65,7 +65,7 @@ SMODS.Enhancement {
 
     update = function(self, card, dt)
         xchip = 1
-        for _, plcard in ipairs(G.playing_cards) do
+        for _, plcard in ipairs(G.playing_cards or {}) do
             if SMODS.has_enhancement(plcard, 'm_tb_blossom') and plcard ~= card then
                 xchip = xchip + plcard.ability.extra.xchip_increase
             end

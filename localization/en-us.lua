@@ -20,7 +20,7 @@ return {
             },
 
             m_tb_blossom = {
-                name = "Blossom",
+                name = "Blossom Card",
                 text = {
                     "This card gains {X:chips,C:white}X#2#{} chips for",
                     "every other {C:attention}blossom card{} in full",
@@ -120,7 +120,7 @@ return {
                 name = "Spring",
                 text = {
                     "Enhances {C:attention}#1#{} selected cards",
-                    "into a {C:attention}#2# card{}."
+                    "into a {C:attention}#2#{}."
                 }
             }
         },
