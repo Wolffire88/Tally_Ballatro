@@ -65,6 +65,7 @@ SMODS.Joker{
         -- purple seal chance
         if context.before then
             if pseudorandom('tieseal') < G.GAME.probabilities.normal / card.ability.extra.seal_chance then
+                ---@type Card
                 local rand_card = pseudorandom_element(context.scoring_hand, 'tieseal_card')
 
                 --Generate the actual purple seal
@@ -299,7 +300,7 @@ SMODS.Joker {
                     trigger = 'after',
                     delay = 0.3,
                     func = function()
-                        trance_card = SMODS.add_card({
+                        SMODS.add_card({
                             set = 'Spectral',
                             key = 'c_trance'
                         })
@@ -464,7 +465,7 @@ SMODS.Joker {
     end,
 
     in_pool = function(self, args)
-        stone_count = 0
+        local stone_count = 0
 
         for _, card in ipairs(G.playing_cards) do
             if SMODS.has_enhancement(card, 'm_stone') then
@@ -602,18 +603,16 @@ SMODS.Joker {
                 
                 return {
                     message = localize('k_hiatus'),
-                    colour = G.C.FILTER
+                    colour = G.C.FILTER,
                 }
             else
                 --Chip away at mult
-                if card.ability.extra.mult > 0 then
-                    card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
-                    return {
-                        message = localize { type = 'variable', key = 'a_mult_minus', vars = { card.ability.extra.mult_loss } },
-                        colour = G.C.RED,
-                        message_card = card
-                    }
-                end
+                card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
+                return {
+                    message = localize { type = 'variable', key = 'a_mult_minus', vars = { card.ability.extra.mult_loss } },
+                    colour = G.C.RED,
+                    delay = 0.2
+                }
             end
         end
 
@@ -627,14 +626,11 @@ SMODS.Joker {
                 }
             else
                 --Molt away the chips
-                if card.ability.extra.chips > 0 then
-                    card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chip_loss
-                    return {
-                        message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.chip_loss } },
-                        colour = G.C.BLUE,
-                        message_card = card
-                    }
-                end
+                card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chip_loss
+                return {
+                    message = localize { type = 'variable', key = 'a_chips_minus', vars = { card.ability.extra.chip_loss } },
+                    colour = G.C.BLUE
+                }
             end
         end
 
@@ -836,6 +832,7 @@ SMODS.Joker {
         --Prevent bananaman from killing himself
         if context.card_added and context.card ~= card and not context.blueprint and
         pseudorandom('bananaman') < G.GAME.probabilities.normal / card.ability.extra.odds then
+            ---@type Card
             local bought_card = context.card
 
             if bought_card.config.center.set == "Joker" and bought_card.config.center.name ~= 'Gros Michel' then
@@ -845,7 +842,7 @@ SMODS.Joker {
                     blockable = false,
                     func = function()
                         SMODS.destroy_cards(bought_card, nil, true)
-                        michel = create_card("joker", G.jokers, nil, nil, nil, nil, "j_gros_michel" )
+                        local michel = create_card("joker", G.jokers, nil, nil, nil, nil, "j_gros_michel" )
                         michel:add_to_deck()
                         G.jokers:emplace(michel)
                         return true
