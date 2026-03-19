@@ -13,6 +13,13 @@ New content:
  - Spring (Tarot): Enhances two (2) cards into Blossom cards.
  - Storm (Spectral): Duplicates all held in hand Blossom cards.
 
+Bugfixes and balancing:
+ - Hiatus effects all cards at once now
+ - Hiatus no longer erroneously calls "add_card" on behalf of G.E_MANAGER (it just doesn't call an event now)
+ - Rasins now triggers on all lowest ranks instead of first played
+ - Rasins now costs $7 instead of $5
+ - Other misc. bugfixes
+
 ## Content:
 
 ### New Jokers!
