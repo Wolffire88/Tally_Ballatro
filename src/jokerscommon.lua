@@ -392,7 +392,8 @@ SMODS.Joker {
                 card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
                 return {
                     message = localize { type = 'variable', key = 'a_mult_minus', vars = { card.ability.extra.mult_loss } },
-                    colour = G.C.RED
+                    colour = G.C.RED,
+                    delay = 0.2
                 }
             end
         end
