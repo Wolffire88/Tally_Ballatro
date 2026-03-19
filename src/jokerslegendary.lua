@@ -232,6 +232,8 @@ SMODS.Joker {
     atlas = "tb_joker",
     
     loc_vars = function(self, info_queue, card)
+        local main_end
+        
         if card.area and card.area == G.jokers then
             local joker1, joker2
 
@@ -439,7 +441,7 @@ SMODS.Joker {
 
             if #G.jokers.cards <= G.jokers.config.card_limit and pseudorandom('shea_return') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 G.E_MANAGER:add_event(Event({
-                    trigger = after,
+                    trigger = "after",
                     delay = 0.3,
                     func = function()
                         local shea_copy = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_tb_shea")

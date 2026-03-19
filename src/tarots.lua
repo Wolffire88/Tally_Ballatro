@@ -143,14 +143,14 @@ SMODS.Consumable {
         end
 
         --Additional stuff
-        nominal_chips = card1.ability.perma_bonus + card2.ability.perma_bonus
-        nominal_mult = card1.ability.perma_mult + card2.ability.perma_mult
-        nominal_xchips = card1.ability.perma_x_chips + card2.ability.perma_x_chips      -- These ones aren't used by tally mod and are here for cross compatibility
-        nominal_xmult = card1.ability.perma_x_mult + card2.ability.perma_x_mult
-        held_chips = card1.ability.perma_h_chips + card2.ability.perma_h_chips
-        held_mult = card1.ability.perma_h_mult + card2.ability.perma_h_mult
-        held_xchips = card1.ability.perma_h_x_chips + card2.ability.perma_h_x_chips
-        held_xmult = card1.ability.perma_h_x_mult + card2.ability.perma_h_x_mult
+        local nominal_chips = card1.ability.perma_bonus + card2.ability.perma_bonus
+        local nominal_mult = card1.ability.perma_mult + card2.ability.perma_mult
+        local nominal_xchips = card1.ability.perma_x_chips + card2.ability.perma_x_chips      -- These ones aren't used by tally mod and are here for cross compatibility
+        local nominal_xmult = card1.ability.perma_x_mult + card2.ability.perma_x_mult
+        local held_chips = card1.ability.perma_h_chips + card2.ability.perma_h_chips
+        local held_mult = card1.ability.perma_h_mult + card2.ability.perma_h_mult
+        local held_xchips = card1.ability.perma_h_x_chips + card2.ability.perma_h_x_chips
+        local held_xmult = card1.ability.perma_h_x_mult + card2.ability.perma_h_x_mult
 
         --FUSION DANCE
         local fusion = SMODS.create_card(cardtable)

@@ -26,8 +26,7 @@ SMODS.Consumable {
                     return true
                 end
             }))
-            
-            return nil
+            return
         end
 
         G.E_MANAGER:add_event(Event({

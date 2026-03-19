@@ -228,7 +228,7 @@ SMODS.Joker {
     end,
 
     in_pool = function(self, args)
-        queen_count = 0
+        local queen_count = 0
 
         for _, card in ipairs(G.playing_cards) do
             if card:get_id() == 12 then
@@ -259,6 +259,8 @@ SMODS.Joker {
     atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
+        local main_end
+
         if card.area and card.area == G.jokers then
             local joker1, joker2
 
@@ -528,14 +530,14 @@ SMODS.Joker {
                     end
                 }))
 
-                editionless = {}
+                local editionless = {}
                 for _, hcard in ipairs(G.hand.cards) do
                     if not hcard.edition then
                         table.insert(editionless, hcard)
                     end
                 end
 
-                to_edition = pseudorandom_element(editionless, "fatedstars")
+                local to_edition = pseudorandom_element(editionless, "fatedstars")
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.3,

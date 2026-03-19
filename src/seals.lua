@@ -133,6 +133,7 @@ SMODS.Seal {
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
+            local ret1, ret2, finalret
             card.ability.seal.extra.cards = {}
             for i=1, #context.scoring_hand do
                 if context.scoring_hand[i] == card then
@@ -142,7 +143,7 @@ SMODS.Seal {
             end
 
             if card.ability.seal.extra.cards[1] then
-                local ret1 = {
+                ret1 = {
                     card_eval_status_text(card.ability.seal.extra.cards[1], 'extra', nil, nil, nil, {
                         message = localize('k_again_ex'),
                         colour = G.C.FILTER,
@@ -151,7 +152,7 @@ SMODS.Seal {
                 }
             end
             if card.ability.seal.extra.cards[2] then
-                local ret2 = {
+                ret2 = {
                     card_eval_status_text(card.ability.seal.extra.cards[2], 'extra', nil, nil, nil, {
                         message = localize('k_again_ex'),
                         colour = G.C.FILTER,

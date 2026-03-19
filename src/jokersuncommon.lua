@@ -787,7 +787,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
 
-        neg_count = 0
+        local neg_count = 0
 
         if G.playing_cards then
             for _, dcard in ipairs(G.playing_cards) do

@@ -64,7 +64,7 @@ SMODS.Enhancement {
     end,
 
     update = function(self, card, dt)
-        xchip = 1
+        local xchip = 1
         for _, plcard in ipairs(G.playing_cards or {}) do
             if SMODS.has_enhancement(plcard, 'm_tb_blossom') and plcard ~= card then
                 xchip = xchip + plcard.ability.extra.xchip_increase

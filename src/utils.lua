@@ -40,7 +40,7 @@ TB.reverse_table = function(tb)
 end
 
 TB.concat_tables = function(t1, t2)
-    t_copy = {}
+    local t_copy = {}
     TB.copy_table(t1, t_copy)
     for _, v in ipairs(t2) do
         t_copy[#t_copy + 1] = v
