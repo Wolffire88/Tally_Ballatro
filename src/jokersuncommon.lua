@@ -304,7 +304,7 @@ SMODS.Joker {
         if context.individual and context.cardarea == G.play then
             local rasin_rank = 15
             for _, pcard in ipairs(context.scoring_hand) do
-                if temp_rank > pcard:get_id() and not SMODS.has_no_rank(pcard) then
+                if rasin_rank > pcard:get_id() and not SMODS.has_no_rank(pcard) then
                     rasin_rank = pcard:get_id()
                 end
             end
