@@ -45,15 +45,15 @@ The Zirconium edition, based off of the song "Ruler of Everything," Tally Hall's
 
 ## Changelog:
 
-| Version  | Description
-| -        | -
-| 1.0.0    | First full release
-| 1.0.1    | Bug fixes
-| 1.0.2    | Shaders
-| 1.1.0    | Jokers as Neco Arc compatibility
-| 1.1.1    | Bug fixes and a couple reworks
-| 1.2.0    | The Tie Update™; Several tie seals added, new jokers added, Jokers as Neco Arc compatibility removed
-| 1.2.1    | Yellow tie fix
-| 1.3.0    | The "I forgot to commit everything" update! Several new jokers added, one new spectral and tarot added
-| 1.4.0    | The Spring and Storm update. One new enhancement added. New tarot and spectral added alongside. README overhaul
-| 1.4.1pre | Fixed a syntax error with Shea. G&E and Ketchup no longer take forever to discard cards.
+| Version   | Description
+| -         | -
+| 1.0.0     | First full release
+| 1.0.1     | Bug fixes
+| 1.0.2     | Shaders
+| 1.1.0     | Jokers as Neco Arc compatibility
+| 1.1.1     | Bug fixes and a couple reworks
+| 1.2.0     | The Tie Update™; Several tie seals added, new jokers added, Jokers as Neco Arc compatibility removed
+| 1.2.1     | Yellow tie fix
+| 1.3.0     | The "I forgot to commit everything" update! Several new jokers added, one new spectral and tarot added
+| 1.4.0     | The Spring and Storm update. One new enhancement added. New tarot and spectral added alongside. README overhaul
+| 1.4.1     | Fixed a syntax error with Shea. G&E and Ketchup no longer take forever to discard cards.

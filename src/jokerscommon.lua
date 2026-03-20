@@ -606,7 +606,7 @@ SMODS.Joker {
                     message = localize('k_hiatus'),
                     colour = G.C.FILTER,
                 }
-            else
+            elseif (card.ability.extra.mult > 0) then
                 --Chip away at mult
                 card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_loss
                 return {
@@ -625,7 +625,7 @@ SMODS.Joker {
                     message = localize('k_hiatus'),
                     colour = G.C.FILTER
                 }
-            else
+            elseif (card.ability.extra.chips > 0) then
                 --Molt away the chips
                 card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chip_loss
                 return {
