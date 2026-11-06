@@ -1,5 +1,5 @@
 # Tally Ballatro
-![Tally Ballatro mod cover image](https://i.imgur.com/59nyOqa.png)\
+![Tally Ballatro mod cover image](assets/TB_splash.png)
 A Balatro mod about everyone's favorite band, Tally Hall! This is a moderately sized content mod that adds new jokers, tarots, spectrals, and enhancements which reference different aspects of everyone's favorite indie band, Tally Hall!
 
 ## Newest version: 1.5.0 - The Reunion Update!
