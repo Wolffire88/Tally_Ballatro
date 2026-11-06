@@ -2,24 +2,25 @@
 version = "1.0.0"
 priority = 0
 
-# Set up and flag "played this round" when a card is scored
+# set the played status of a card to false at round start.
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
-pattern = '''G.hand.highlighted[i].ability.played_this_ante = true'''
+pattern = "G.GAME.current_round.used_packs = {}"
 position = "after"
-payload = '''G.hand.highlighted[i].ability.played_this_round = true'''
+payload = '''
+
+for _, v in ipairs(G.playing_cards) do
+    v.ability.played_this_round = false
+end
+'''
 match_indent = true
 
-# Deflag "played this round" when selecting a blind
+# Flag if a card has been played
 [[patches]]
 [patches.pattern]
 target = "functions/state_events.lua"
-pattern = '''
-for k, v in ipairs(G.playing_cards) do
-    v.ability.discarded = nil
-    v.ability.forced_selection = nil
-'''
+pattern = "v.ability.played_this_ante = true"
 position = "after"
-payload = '''    v.ability.played_this_round = false'''
+payload = "v.ability.played_this_round = true"
 match_indent = true

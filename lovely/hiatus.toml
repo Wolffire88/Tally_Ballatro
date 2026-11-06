@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# check if a hiatus card should be undebuffed
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if G.STAGE == G.STAGES.RUN then"
+position = "after"
+payload = '''
+    if self.end_debuff and self.end_debuff < os.time() then
+        SMODS.debuff_card(self, false, "tb_hiatus")
+    end
+'''
+match_indent = true

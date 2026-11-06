@@ -51,10 +51,11 @@ return {
             c_tb_hiatus = {
                 name = "Hiatus",
                 text = {
-                    "Perminantly debuffs up to",
+                    "Temporarily debuffs up to",
                     "{C:attention}#1#{} selected cards.",
+                    "for approximately {C:attention}15 years{}.",
                     "Gain {C:money}money{} equal to the total",
-                    "chip value of debuffed cards."
+                    "chip value of the debuffed cards."
                 }
             },
 
@@ -126,7 +127,7 @@ return {
         },
 
         Joker = {
-            j_tb_joehawleyjoehawley = {
+            j_tb_jhjh = {
                 name = "Joe Hawley Joe Hawley",
                 text = {
                     "This joker retriggers cards",
@@ -245,6 +246,16 @@ return {
                     "into {C:attention}Gros Michel{}. This joker",
                     "gains {X:mult,C:white}x#1#{} mult per banana",
                     "destroyed this run. {C:inactive}(currently {X:mult,C:white}x#2#{C:inactive})"
+                }
+            },
+
+            j_tb_cube = {
+                name = "Life in a Cube",
+                text = {
+                    "Convert all {C:attention}scoring{} cards",
+                    "to {C:attention}stone cards{} if a",
+                    "{C:attention}#1#{} is played.",
+                    "{C:inactive}(changes at the end of the round){}"
                 }
             },
 
@@ -379,6 +390,24 @@ return {
                 }
             },
 
+            j_tb_welcometonow = {
+                name = "Welcome to Now",
+                text = {
+                    "Apply a {C:green}green{}, {C:chips}blue{}, {C:inactive}gray,",
+                    "and {C:money}yellow{} tie to the first {C:attention}4{}",
+                    "scoring cards when playing a {C:attention}Four of a kind{}."
+                }
+            },
+
+            j_tb_goodwork = {
+                name = "Keep Up The Good Work",
+                text = {
+                    "{X:mult,C:white}x#1#{} mult",
+                    "This joker gains {X:mult,C:white}x#2#{} mult",
+                    "when playing a {C:attention}#3#{} of {V:1}#4#{}."
+                }
+            },
+
             j_tb_miraclemusical = {
                 name = "Miracle Musical",
                 text = {
@@ -461,8 +490,35 @@ return {
                 }
             },
 
+            j_tb_blindpig = {
+                name = "Blind Pig",
+                text = {
+                    "{X:mult,C:white}x#1#{} mult.",
+                    "Gain {X:mult,C:white}x#2#{} mult per",
+                    "{C:hearts}red suit{} card destroyed",
+                    "this run."
+                }
+            },
+
+            j_tb_windows = {
+                name = "Roll Your Windows Down",
+                text = {
+                    "Retrigger played {C:diamonds}diamond{} cards."
+                }
+            },
+
+            j_tb_alone = {
+                name = "Alone at the Edge of the Universe",
+                text = {
+                    "This joker gives {X:mult,C:white}Xmult{}",
+                    "equal to the number of unplayed",
+                    "poker hands this run plus {C:attention}1{}.",
+                    "{C:inactive}(Currently {X:mult,C:white}x#1#{})"
+                }
+            },
+
             j_tb_hawley = {
-                name = "The Singer",
+                name = "The Banished",
                 text = {
                     "This joker gains {X:mult,C:white}x#2#{} mult",
                     "whenever a {C:attention}debuffed{} played card",
@@ -525,7 +581,7 @@ return {
             },
 
             j_tb_shea = {
-                name = "The Stand In",
+                name = "The Singer",
                 text = {
                     "After {C:attention}#1#{} round(s)",
                     "sell this joker to create a",
@@ -545,6 +601,18 @@ return {
                     "This joker gains {X:mult,C:white}x#1#{} mult if",
                     "the final played hand is a {C:attentinon}High Card{}",
                     "{C:inactive}(Currently {X:mult,C:white}x#2#{C:inactive} mult){}"
+                },
+                unlock = {
+                    "?????"
+                }
+            },
+
+            j_tb_altruda = {
+                name = "The Host",
+                text = {
+                    "This joker gives {X:money,C:white}X#1#{}",
+                    "{C:money}dollars{} whenever a {C:attentnion}face card{}",
+                    "is {C:attention}scored{}"
                 },
                 unlock = {
                     "?????"
@@ -608,6 +676,14 @@ return {
                 text = {
                     "{C:green}#1# in #2#{} chance to level up",
                     "{C:attention}High Card{} when discarded."
+                }
+            },
+
+            tb_pinktie_seal = {
+                name = "Pink Tie",
+                text = {
+                    "{C:money}$#1#{} if played hand",
+                    "contains a {C:attention}face card{}."
                 }
             },
 
@@ -676,14 +752,17 @@ return {
             k_left_ex   = "Left the band!",
             k_trance    = "Put in a trance!",
             k_zirconium = "Zirconium!",
-            k_bora      = "Bora!"
+            k_bora      = "Bora!",
+            k_alone_ex  = "Humming a tune..."
         },
 
         v_dictionary = {
             a_echips        = "^#1#",
             a_echips_minus  = "^-#1#",
             a_emult         = "^#1# Mult",
-            a_emult_minus   = "^-#1# Mult"
+            a_emult_minus   = "^-#1# Mult",
+            a_xcoin         = "X$#1#",
+            a_dollars       = "$#1#"
         },
 
         labels = {
@@ -694,7 +773,8 @@ return {
             tb_yellowtie_seal = "Yellow Tie",
             tb_graytie_seal = "Gray Tie",
             tb_blacktie_seal = "Black Tie",
-            tb_orangetie_seal = "Orange Tie"
+            tb_orangetie_seal = "Orange Tie",
+            tb_pinktie_seal = "Pink Tie"
         }
     }
 }

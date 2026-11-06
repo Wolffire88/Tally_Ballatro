@@ -127,6 +127,7 @@ SMODS.Consumable {
         local dollars = 0
         for _, sacrifice in ipairs(G.hand.highlighted) do
             SMODS.debuff_card(sacrifice, true, "tb_hiatus")
+            sacrifice.end_debuff = os.time() + TB.hiatus_time
             dollars = dollars + sacrifice:get_chip_bonus()
         end
 
@@ -147,7 +148,7 @@ SMODS.Consumable {
     can_use = function(self, card)
         local legal_select = true
         for _, sacrifice in ipairs(G.hand.highlighted) do
-            if sacrifice:get_seal() == "tb_redtie" then
+            if sacrifice:get_seal() == "tb_redtie" or sacrifice.debuff then
                 legal_select = false
                 break
             end

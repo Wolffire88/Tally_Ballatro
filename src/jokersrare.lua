@@ -1,10 +1,11 @@
+-- Hawaii Pt. 2
 SMODS.Joker {
     key = "hawaiitwo",
     name = "Hawaii Pt.2",
     config = { extra = { xmult = 1, xmult_increase = 0.25 } },
     pos = {
-        x = 0,
-        y = 2
+        x = 9,
+        y = 1
     },
     rarity = 3,
     cost = 8,
@@ -76,13 +77,13 @@ SMODS.Joker {
     end
 }
 
-
+-- More Wishes
 SMODS.Joker {
     key = "morewishes",
     name = "More Wishes",
     config = { extra = { current_card = nil, t_retrig = 0, highest = 0 } },
     pos = {
-        x = 0,
+        x = 3,
         y = 3
     },
     rarity = 3,
@@ -129,12 +130,13 @@ SMODS.Joker {
     end
 }
 
+-- Technical Difficulties
 SMODS.Joker {
     key = "technicaldifficulties",
     name = "Technical Difficulties",
     config = { extra = { xmult = 1, xmult_increase = 0.2, odds = 6 } },
     pos = {
-        x = 1,
+        x = 4,
         y = 3
     },
     rarity = 3,
@@ -189,12 +191,13 @@ SMODS.Joker {
     end
 }
 
+-- The Ad Twins
 SMODS.Joker {
     key = "maryashley",
     name = "The Ad Twins",
     config = { extra = { xmult = 3, num_queens = 0} },
     pos = {
-        x = 2,
+        x = 5,
         y = 3
     },
     rarity = 3,
@@ -240,13 +243,14 @@ SMODS.Joker {
     end
 }
 
+-- Steve Gallagher (The Drummer?)
 SMODS.Joker {
     key = "gallagher",
     name = "The Drummer?",
     config = { extra = { odds = 3 } },
     pos = {
-        x = 0,
-        y = 4
+        x = 6,
+        y = 3
     },
     rarity = 3,
     cost = 12,
@@ -344,13 +348,14 @@ SMODS.Joker {
     end
 }
 
+-- Boralogue
 SMODS.Joker {
     key = "boralogue",
     name = "Boralogue",
-    config = { extra = { bora_rank = 1, xmult = 1, xmult_increase = 1, xmult_cap = 13 } },
+    config = { extra = { xmult = 1, xmult_increase = 1, xmult_cap = 13 } },
     pos = {
-        x = 2,
-        y = 1
+        x = 7,
+        y = 3
     },
     rarity = 3,
     cost = 8,
@@ -360,11 +365,11 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { 
-            TB.to_roman[card.ability.extra.bora_rank], 
+            TB.to_roman[card.ability.extra.xmult], 
             card.ability.extra.xmult, 
             card.ability.extra.xmult_increase, 
             card.ability.extra.xmult_cap 
@@ -383,7 +388,6 @@ SMODS.Joker {
         if context.end_of_round and context.beat_boss and not context.blueprint and 
         card.ability.extra.xmult < card.ability.extra.xmult_cap and context.cardarea == G.jokers then
             card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_increase
-            card.ability.extra.bora_rank = card.ability.extra.xmult
 
             return {
                 message = localize('k_upgrade_ex')
@@ -392,6 +396,7 @@ SMODS.Joker {
     end
 }
 
+-- Dream Journal
 SMODS.Joker {
     key = "dreamjournal",
     name = "Dream Journal",
@@ -417,8 +422,8 @@ SMODS.Joker {
         randcard = nil
     } },
     pos = {
-        x = 3,
-        y = 1
+        x = 8,
+        y = 3
     },
     rarity = 3,
     cost = 10,
@@ -428,7 +433,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         local EffectTable = {
@@ -437,7 +442,7 @@ SMODS.Joker {
             { set = "Other", key = "tb_d_joe", specific_vars = {card.ability.extra.echips, card.ability.extra.emult} },
             { set = "Other", key = "tb_d_andrew", specific_vars = {card.ability.extra.permamult} },
             { set = "Other", key = "tb_d_zubin", specific_vars = {card.ability.extra.chips} },
-            { set = "Other", ley = "tb_d_none" }
+            { set = "Other", key = "tb_d_none" }
         }
 
         info_queue[#info_queue + 1] = EffectTable[card.ability.extra.dream_effect] or EffectTable[6]
@@ -494,13 +499,14 @@ SMODS.Joker {
     end
 }
 
+-- Fate of the Stars
 SMODS.Joker {
     key = "stars",
     name = "Fate of the Stars",
     config = {},
     pos = {
-        x = 4,
-        y = 1
+        x = 9,
+        y = 3
     },
     rarity = 3,
     cost = 8,
@@ -510,7 +516,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card) 
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -553,13 +559,14 @@ SMODS.Joker {
     end
 }
 
+-- The Mind Electric
 SMODS.Joker {
     key = "mindelectric",
     name = "The Mind Electric",
     config = {},
     pos = {
-        x = 4,
-        y = 0
+        x = 0,
+        y = 4
     },
     rarity = 3,
     cost = 10,
@@ -569,9 +576,164 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)
         if nil then print("lmao this card fucking sucks") end   --comment with extra steps amirite chat?
+    end
+}
+
+-- Blind Pig
+SMODS.Joker {
+    key = "blindpig",
+    name = "Blind Pig",
+    config = {},
+    pos = {
+        x = 2,
+        y = 4
+    },
+    rarity = 3,
+    cost = 8,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { G.STAGE == G.STAGES.RUN and TB.JOKERVALS.blindpig.xmult or 1, TB.JOKERVALS.blindpig.scale }}
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.joker_main then
+            return {
+                xmult = TB.JOKERVALS.blindpig.xmult
+            }
+        end
+
+        if context.remove_playing_cards and not context.blueprint then
+            local upgrade = 0
+            for _, v in ipairs(context.removed) do
+                if v:is_suit("Hearts") or v:is_suit("Diamonds") then
+                    upgrade = upgrade + 1
+                end
+            end
+
+            if upgrade then
+                return {    -- purely cosmetic as the joker is upgraded when the cards are destroyed in card:remove()
+                    message = localize { 
+                        type = 'variable', 
+                        key = 'a_xmult', 
+                        vars = { TB.JOKERVALS.blindpig.xmult + (TB.JOKERVALS.blindpig.scale * upgrade) } },
+                    colour = G.C.RED
+                }
+            end
+        end
+    end
+}
+
+-- Roll Your Windows Down
+SMODS.Joker {
+    key = "windows",
+    name = "Roll Your Windows Down",
+    config = {},
+    pos = {
+        x = 1,
+        y = 4
+    },
+    rarity = 3,
+    cost = 7,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker",
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.repetition then
+            local r = 0
+            if context.other_card.base.suit == "Diamonds" then
+                r = 1
+            end
+            return {
+                repetitions = r
+            }
+        end
+    end
+}
+
+-- Alone at the Edge of the Universe
+SMODS.Joker {
+    key = "alone",
+    name = "Alone at the Edge of the Universe",
+    config = { extra = { xmult = 1 }},
+    pos = {
+        x = 3,
+        y = 4
+    },
+    rarity = 3,
+    cost = 11,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker",
+
+    in_pool = function(self, args)
+        local len = 1
+        for _, hand in pairs(G.GAME.hands) do
+            if hand.played == 0 then
+                len = len + 1
+            end
+        end
+
+        return len ~= 1
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        local len = 1
+        for _, hand in pairs(G.GAME.hands) do
+            if hand.played == 0 then
+                len = len + 1
+            end
+        end
+
+        return { vars = { len > 1 and len or 1 } }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.before then
+            card.ability.extra.xmult = 1
+            for _, hand in pairs(G.GAME.hands) do
+                if hand.played == 0 then
+                    card.ability.extra.xmult = card.ability.extra.xmult + 1
+                end
+            end
+
+            if card.ability.extra.xmult == 1 then
+                SMODS.destroy_cards(card)
+                return {
+                    message = localize("k_alone_ex")
+                }
+            end
+        end
+
+        if context.joker_main and card.ability.extra.xmult ~= 1 then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
     end
 }

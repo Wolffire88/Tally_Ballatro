@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Scale blind pig when in game and not saving
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "table.remove(G.playing_cards, k)"
+position = "after"
+payload = '''
+if not G.in_delete_run and (v:is_suit("Hearts") or v:is_suit("Diamonds")) then
+    TB.JOKERVALS.blindpig.xmult = TB.JOKERVALS.blindpig.xmult + TB.JOKERVALS.blindpig.scale
+end
+'''
+match_indent = true

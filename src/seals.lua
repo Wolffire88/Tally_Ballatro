@@ -231,3 +231,57 @@ SMODS.Seal {
         end
     end
 }
+
+
+SMODS.Seal {
+    key = "pinktie",
+    atlas = "ties",
+    badge_colour = HEX("fc89ac"),
+    config = { extra = { dollars = 10 } },
+    pos = {
+        x = 1, 
+        y = 2
+    },
+    unlocked = true,
+    discovered = false,
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.seal.extra.dollars } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            if card:is_face() then
+                return {
+                    message = localize { type = 'variable', key = 'a_dollars', vars = { card.ability.seal.extra.dollars } },
+                    colour = G.C.MONEY,
+                    func = function()
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                ease_dollars(card.ability.seal.extra.dollars, true)
+                                return true
+                            end
+                        }))
+                    end
+                }
+            end
+
+            for _, pcard in ipairs(context.scoring_hand) do
+                if pcard:is_face() then
+                    return {
+                        message = localize { type = 'variable', key = 'a_dollars', vars = { card.ability.seal.extra.dollars } },
+                        colour = G.C.MONEY,
+                        func = function()
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    ease_dollars(card.ability.seal.extra.dollars, true)
+                                    return true
+                                end
+                            }))
+                        end
+                    }
+                end
+            end
+        end
+    end
+}

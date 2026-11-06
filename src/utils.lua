@@ -5,13 +5,31 @@ end
 TB.config = SMODS.current_mod.config
 TB.prefix = SMODS.current_mod.prefix
 
+TB.JOKERVALS = {
+    blindpig = {
+        xmult = 1,
+        scale = 0.05
+    },
+    bananaman = {
+        bananas_destroyed = 0,
+        cavendish_destroyed = 0
+    }
+}
+
+-- Joe Hawley Joe Hawley played before check
+TB.played_before = {}
+
+-- The length of Tally Hall's 15 year hiatus in seconds.
+TB.hiatus_time = 478915200
+
+-- Simple table copier function
 TB.copy_table = function(ts, td)
     for idx, item in pairs(ts) do
         td[idx] = item
     end
 end
 
---Convert a card ID to a numerical rank
+-- Convert a card ID to a numerical rank
 TB.id_to_rank = function(rank, acehigh)
     if rank <= 10 then return rank end
     if rank > 10 and rank < 14 then return 10 end
@@ -20,7 +38,7 @@ TB.id_to_rank = function(rank, acehigh)
     end
 end
 
---Basic table search function
+-- Basic table search function
 TB.is_in_table = function(table, item)
     for _, t in ipairs(table) do
         if item == t then
@@ -31,6 +49,7 @@ TB.is_in_table = function(table, item)
     return false
 end
 
+-- Basic table reverser
 TB.reverse_table = function(tb)
     if not tb then return nil end
 
@@ -39,6 +58,7 @@ TB.reverse_table = function(tb)
     end
 end
 
+-- Basic table concatenation function
 TB.concat_tables = function(t1, t2)
     local t_copy = {}
     TB.copy_table(t1, t_copy)
@@ -72,7 +92,7 @@ TB.federman_effect = function(card, j1, j2, context)
     end
 end
 
---Roman numerals
+--Roman numerals for Boralogue
 TB.to_roman = {
     "I",
     "II",
@@ -112,11 +132,14 @@ TB.POKERHANDS = {
     "High Card"
 }
 
+-- Table of calculation functions for Dream Journal
 TB.DreamJournal = {
     Ross = function(card, context)
         if context.before and context.scoring_name == card.ability.extra.poker_hand then
             local randcard = pseudorandom_element(context.scoring_hand, 'DJ_tiecard')
-            randcard:set_seal(SMODS.poll_seal({ guaranteed = true, options = {"tb_graytie"} }))
+            if randcard then
+                randcard:set_seal(SMODS.poll_seal({ guaranteed = true, options = {"tb_graytie"} }))
+            end
             card:juice_up()
         end
     end,
@@ -223,7 +246,7 @@ SMODS.calculate_main_scoring = function(context, scoring_hand)
     if next(find_joker('The Mind Electric')) and scoring_hand and context.cardarea.cards then
         TB.reverse_table(context.cardarea.cards)
 
-        preserve = context.cardarea
+        local preserve = context.cardarea
         calc_main(context, scoring_hand)
 
         if context.cardarea == "unscored" then  --I don't know why it does this

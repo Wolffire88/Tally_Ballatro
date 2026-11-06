@@ -1,9 +1,10 @@
+-- Marvin's Marvelous Mechanical Museum
 SMODS.Joker {
     key = "mechanicalmuseum",
     name = "Marvin's Marvelous Mechanical Museum",
     config = {},
     pos = {
-        x = 3,
+        x = 5,
         y = 1
     },
     rarity = 2,
@@ -50,12 +51,13 @@ SMODS.Joker {
     end
 }
 
+-- 15 Seconds of Bora
 SMODS.Joker {
     key = "bora",
     name = "15 Seconds of Bora",
     config = { extra = { xmult = 3, is_active = false, timestamp = os.time() } },
     pos = {
-        x = 4,
+        x = 6,
         y = 1
     },
     rarity = 2,
@@ -110,12 +112,13 @@ SMODS.Joker {
     end
 }
 
+-- Mucka Blucka
 SMODS.Joker {
     key = "muckablucka",
     name = "Mucka Blucka",
     config = {},
     pos = {
-        x = 5,
+        x = 7,
         y = 1
     },
     rarity = 2,
@@ -165,12 +168,13 @@ SMODS.Joker {
     end
 }
 
+-- These are my Last Words
 SMODS.Joker {
     key = "letskillross",
     name = "These are my last words",
     config = { extra = { xchips = 1, xchips_increase = 0.2 } },
     pos = {
-        x = 6,
+        x = 8,
         y = 1
     },
     rarity = 2,
@@ -185,10 +189,10 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card)
         local ross_suit = G.GAME.current_round.ross_suit or { suit = 'Spades' }
-        return { vars = { 
-            localize(ross_suit.suit, 'suits_singular'), 
-            card.ability.extra.xchips_increase, 
-            card.ability.extra.xchips, 
+        return { vars = {
+            localize(ross_suit.suit, 'suits_singular'),
+            card.ability.extra.xchips_increase,
+            card.ability.extra.xchips,
             colours = { G.C.SUITS[ross_suit.suit]}
         }}
     end,
@@ -221,14 +225,14 @@ SMODS.Joker {
     end
 }
 
-
+-- Miracle Musical
 SMODS.Joker {
     key = "miraclemusical",
     name = "Miracle Musical",
     config = { extra = { repetitions = 1, xmult = 1, xmult_scale = 0.25 } },
     pos = {
-        x = 6,
-        y = 2
+        x = 2,
+        y = 3
     },
     rarity = 2,
     cost = 7,
@@ -275,13 +279,13 @@ SMODS.Joker {
     end
 }
 
-
+-- Raisins
 SMODS.Joker {
     key = "rasins",
     name = "Rasins",
     config = { extra = { xmult = 2, triggers = 10 } },
     pos = {
-        x = 1,
+        x = 3,
         y = 2
     },
     rarity = 2,
@@ -357,6 +361,7 @@ SMODS.Joker {
     end
 }
 
+-- Hidden in the Sand
 SMODS.Joker {
     key = "hiddeninthesand",
     name = "Hidden in the Sand",
@@ -422,12 +427,13 @@ SMODS.Joker {
     end
 }
 
+-- Actual Cannibal Shia LaBeouf!
 SMODS.Joker {
     key = "shialabeouf",
     name = "Actual Cannibal Shia LaBeouf!",
     config = {},
     pos = {
-        x = 3,
+        x = 4,
         y = 2
     },
     rarity = 2,
@@ -464,12 +470,13 @@ SMODS.Joker {
     end
 }
 
+-- The Ruler of Everything
 SMODS.Joker {
     key = "rulerofeverything",
     name = "The Ruler of Everything",
     config = { extra = { odds = 2 } },
     pos = {
-        x = 4,
+        x = 5,
         y = 2
     },
     rarity = 2,
@@ -520,13 +527,14 @@ SMODS.Joker {
     end
 }
 
+-- Tally Mail
 SMODS.Joker {
     key = "tallymail",
     name = "Tally Mail",
     config = { extra = { xmult = 1, xmult_increase = 0.1 } },
     pos = {
-        x = 5,
-        y = 2
+        x = 1,
+        y = 3
     },
     rarity = 2,
     cost = 7,
@@ -564,13 +572,14 @@ SMODS.Joker {
     end
 }
 
+-- The Whole World and You
 SMODS.Joker {
     key = "wholeworld",
     name = "The Whole World",
     config = { extra = { xmult_rate = 0.4, xmult = 1, spades = {} } },
     pos = {
-        x = 3,
-        y = 0
+        x = 8,
+        y = 2
     },
     rarity = 2,
     cost = 6,
@@ -580,7 +589,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult_rate } }
@@ -625,13 +634,14 @@ SMODS.Joker {
     end
 }
 
+-- 29 Impressions, 1 Joker
 SMODS.Joker {
     key = "impressions",
     name = "29 Impressions, 1 Joker",
     config = { extra = { copy_card = nil } },
     pos = {
-        x = 0,
-        y = 1
+        x = 1,
+        y = 2
     },
     rarity = 2,
     cost = 8,
@@ -641,7 +651,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { (card.ability.extra.copy_card and card.ability.extra.copy_card.config.center.name or "None") } }
@@ -704,13 +714,14 @@ SMODS.Joker {
     end
 }
 
+-- Tapes
 SMODS.Joker {
     key = "tapes",
     name = "Tapes",
     config = { extra = { chips = 9 } },
     pos = {
-        x = 1,
-        y = 1
+        x = 6,
+        y = 2
     },
     rarity = 2,
     cost = 5,
@@ -720,7 +731,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)   
         if card.debuff or context.blueprint then return nil end
@@ -766,12 +777,13 @@ SMODS.Joker {
     end
 }
 
+-- Turn the Lights Off
 SMODS.Joker {
     key = "lightsout",
     name = "Turn the Lights Off",
     config = { extra = { xchips_increase = 0.5 } },
     pos = {
-        x = 4,
+        x = 7,
         y = 2
     },
     rarity = 2,
@@ -782,7 +794,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -801,7 +813,7 @@ SMODS.Joker {
     end,
 
     calculate = function(self, card, context)
-        if card.debuff then return nil end
+        if card.debuff then return nil end  -- I recently learned this doesn't do anything but it's in every joker so fuck it
 
         if context.joker_main then
             local neg_count = 0
@@ -826,5 +838,111 @@ SMODS.Joker {
         end
 
         return false
+    end
+}
+
+-- Welcome to Now
+SMODS.Joker {
+    key = "welcometonow",
+    name = "Welcome To Now",
+    config = { extra = { xchips_increase = 0.5 } },
+    pos = {
+        x = 9,
+        y = 2
+    },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker",
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_SEALS['tb_greentie']
+        info_queue[#info_queue+1] = G.P_SEALS['tb_bluetie']
+        info_queue[#info_queue+1] = G.P_SEALS['tb_graytie']
+        info_queue[#info_queue+1] = G.P_SEALS['tb_yellowtie']
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff or context.blueprint then return nil end  
+        
+        if context.before and context.scoring_name == "Four of a Kind" then
+            for idx = 1, 4 do
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('tarot1')
+                        context.scoring_hand[idx]:juice_up(0.3, 0.5)
+                        return true
+                    end
+                }))
+            end
+
+            context.scoring_hand[1]:set_seal('tb_greentie', nil, true)
+            context.scoring_hand[2]:set_seal('tb_bluetie', nil, true)
+            context.scoring_hand[3]:set_seal('tb_graytie', nil, true)
+            context.scoring_hand[4]:set_seal('tb_yellowtie', nil, true)
+        end
+    end
+}
+
+-- Keep Up The Good Work
+SMODS.Joker {
+    key = "goodwork",
+    name = "Keep Up The Good Work",
+    config = { extra = { xmult = 1, xmult_scale = 0.2 } },
+    pos = {
+        x = 0,
+        y = 3
+    },
+    rarity = 2,
+    cost = 6,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker",
+
+    loc_vars = function(self, info_queue, card)
+        local interview = G.GAME.current_round.interview
+        local rank = interview and interview.rank or "Ace"
+        local suit = interview and interview.suit or "Spades"
+        
+        return { vars = {
+            card.ability.extra.xmult,
+            card.ability.extra.xmult_scale,
+            rank,
+            suit,
+            colours = { G.C.SUITS[suit]}
+        }}
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+
+        if context.individual then
+            local interviewer = G.GAME.current_round.interview
+            local interviewee = context.other_card.base
+            if interviewee.id == interviewer.id and 
+                interviewee.suit == interviewer.suit then
+                
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_scale
+                return {
+                    message = localize('k_upgrade_ex'),
+                    message_card = card
+                }
+            end
+        end
     end
 }

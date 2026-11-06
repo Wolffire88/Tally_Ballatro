@@ -39,4 +39,8 @@ luac.out
 *.x86_64
 *.hex
 
-.vscode/settings.json
+# Don't save these files lmao
+.vscode
+.lovelyignore
+assets/balalacolorpalate.png
+todo.md

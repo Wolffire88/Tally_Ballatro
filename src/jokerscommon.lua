@@ -1,9 +1,6 @@
---[[
-Joe Hawley Joe Hawley (Common)
-Joker retriggers all cards played in the previous round
-]]--
+-- Joe Hawley Joe Hawley
 SMODS.Joker{
-    key = "joehawleyjoehawley",
+    key = "jhjh",
     name = "Jow Hawley Joe Hawley",
     config = { extra = { repetitions = 1 } },
     pos = {
@@ -21,8 +18,10 @@ SMODS.Joker{
     atlas = "tb_joker",
 
     calculate = function(self, card, context)
+        if card.debuff then return nil end
+
         if context.repetition and context.cardarea == G.play then
-            if G.GAME.current_round.played_before and TB.is_in_table(G.GAME.current_round.played_before, context.other_card) and not card.debuff then
+            if TB.played_before and TB.is_in_table(TB.played_before, context.other_card) then
                 return {
                     repetitions = card.ability.extra.repetitions
                 }
@@ -31,11 +30,7 @@ SMODS.Joker{
     end
 }
 
---[[
-Purple Tie (Common)
-Has a one in six chance to generate a purple seal on a played card
-One in 4 chance for a purple seal to give an extra tarot
-]]
+-- Purple Tie
 SMODS.Joker{
     key = "purpletie",
     name = "Purple Tie",
@@ -115,11 +110,7 @@ SMODS.Joker{
     end
 }
 
---[[
-English Chap (Common)
-Retriggers the first played card of a given rank 3 additional times.
-The rank changes every round.
-]]
+-- English Chap
 SMODS.Joker{
     key = "englishchap",
     name = "English Chap",
@@ -165,10 +156,7 @@ SMODS.Joker{
     end
 }
 
---[[
-Spaghetti Bathtub (Common)
-Gives xchips. Loses xchips per card played
-]]
+-- Spaghetti Bathtub
 SMODS.Joker{
     key = "spaghettibathtub",
     name = "Spaghetti Bathtub",
@@ -244,10 +232,7 @@ SMODS.Joker{
     end
 }
 
---[[
-Zirconium Pants (Common)
-Creates the Trance spectral when scoring a pair of zirconium cards
-]]
+-- Zirconium Pants
 SMODS.Joker {
     key = "zirconiumpants",
     name = "Zirconium Pants",
@@ -329,10 +314,7 @@ SMODS.Joker {
     end
 }
 
---[[
-Natural Ketchup (Common)
-Gives 20 mult. Loses 0.5 per discard.
-]]
+-- Natural Ketchup
 SMODS.Joker {
     key = "naturalketchup",
     name = "Natural Ketchup",
@@ -406,11 +388,7 @@ SMODS.Joker {
     end
 }
 
---[[
-Variations on a Cloud (Common)
-Increases xchips payout whenever a hand of 2 stone cards is played
-Starts at 1x and increases by 0.5x
-]]
+-- Variations on a Cloud
 SMODS.Joker {
     key = "cloudvariations",
     name = "Variations on a Cloud",
@@ -478,17 +456,14 @@ SMODS.Joker {
     end
 }
 
---[[
-Not a Trampoline (Common)
-Gives +12 mult if played hand doesn't have gaps in rank
-]]
+-- Not a Trampoline
 SMODS.Joker {
     key = "notatrampoline",
     name = "Not a Trampoline",
     config = { extra = { mult = 12, no_gap = true } },
     pos = {
-        x = 0,
-        y = 1
+        x = 7,
+        y = 0
     },
     rarity = 1,
     cost = 4,
@@ -499,6 +474,14 @@ SMODS.Joker {
     effect = nil,
     soul_pos = nil,
     atlas = "tb_joker",
+
+    set_sprites = function(self, card)
+        local spritex = pseudorandom('trampoline', 7, 9)
+        card.children.center:set_sprite_pos({
+            x = spritex,
+            y = 0
+        })
+    end,
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
@@ -538,17 +521,13 @@ SMODS.Joker {
     end
 }
 
---[[
-Good and evil (Common)
-Gives 84 chips and 82 mult.
-Slowly loses chips and mult overtime.
-]]
+-- Good and Evil
 SMODS.Joker {
     key = "goodandevil",
     name = "Good and Evil",
     config = { extra = { chips = 84, chip_loss = 2, mult = 82, mult_loss = 1, hiatus = false } },
     pos = {
-        x = 1,
+        x = 0,
         y = 1
     },
     rarity = 1,
@@ -644,16 +623,13 @@ SMODS.Joker {
     end
 }
 
---[[
-Miss Melody (Common)
-Gives +9 chips per played non-face card.
-]]
+-- Miss Melody
 SMODS.Joker {
     key = "missmelody",
     name = "Miss Melody",
     config = { extra = { chips = 9 } },
     pos = {
-        x = 2,
+        x = 1,
         y = 1
     },
     rarity = 1,
@@ -683,13 +659,14 @@ SMODS.Joker {
     end
 }
 
+-- Two Wuv
 SMODS.Joker {
     key = "twowuv",
     name = "Two Wuv",
     config = {},
     pos = {
-        x = 0,
-        y = 0
+        x = 2,
+        y = 1
     },
     rarity = 1,
     cost = 4,
@@ -699,7 +676,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     calculate = function(self, card, context)
         if card.debuff or context.blueprint then return nil end
@@ -755,13 +732,14 @@ SMODS.Joker {
 
 }
 
+-- edu
 SMODS.Joker {
     key = "edu",
     name = "edu",
     config = { extra = { mult = 11 } },
     pos = {
-        x = 1,
-        y = 0
+        x = 0,
+        y = 2
     },
     rarity = 1,
     cost = 6,
@@ -771,7 +749,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
@@ -790,13 +768,14 @@ SMODS.Joker {
     end
 }
 
+-- Banana Man
 SMODS.Joker {
     key = "bananaman",
     name = "The Banana Man",
     config = { extra = { xmult = 1, xmult_increase = 0.5, cavendish_increase = 5, odds = 5 } },
     pos = {
-        x = 2,
-        y = 0
+        x = 3,
+        y = 1
     },
     rarity = 1,
     cost = 5,
@@ -806,7 +785,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = nil,
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
     yes_pool_flag = 'gros_michel_extinct',
 
     loc_vars = function(self, info_queue, card)
@@ -814,8 +793,8 @@ SMODS.Joker {
         return {
             vars = {
                 card.ability.extra.xmult_increase,
-                card.ability.extra.xmult + (G.GAME and G.GAME.bananas_destroyed or 0) * card.ability.extra.xmult_increase 
-                + (G.GAME and G.GAME.cavendish_destroyed or 0) * card.ability.extra.cavendish_increase,
+                card.ability.extra.xmult + (TB.JOKERVALS.bananaman.bananas_destroyed or 0) * card.ability.extra.xmult_increase 
+                + (TB.JOKERVALS.bananaman.cavendish_destroyed or 0) * card.ability.extra.cavendish_increase,
                 G.GAME and G.GAME.probabilities.normal or 1,
                 card.ability.extra.odds,
             }
@@ -862,8 +841,10 @@ SMODS.Joker {
         end
 
         if context.joker_main then
+            local cavendish = TB.JOKERVALS.bananaman.cavendish_destroyed * card.ability.extra.cavendish_increase
+            local michel = TB.JOKERVALS.bananaman.bananas_destroyed * card.ability.extra.xmult_increase
             return {
-                xmult = card.ability.extra.xmult + (G.GAME.bananas_destroyed * card.ability.extra.xmult_increase)
+                xmult = card.ability.extra.xmult + cavendish + michel
             }
         end
     end,
@@ -872,4 +853,80 @@ SMODS.Joker {
         G.GAME.pool_flags.michel_in_pool = false
         G.GAME.force_banana = false
     end,
+}
+
+-- Life in a Cube
+SMODS.Joker {
+    key = "cube",
+    name = "Life in a Cube",
+    config = {},
+    pos = {
+        x = 4,
+        y = 1
+    },
+    rarity = 1,
+    cost = 4,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = nil,
+    atlas = "tb_joker",
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
+        return { vars = { G.GAME and G.GAME.current_round.cube_hand or "High Card" } }
+    end,
+
+    calculate = function(self, card, context)
+        if self.debuff then return nil end
+
+        if context.after then
+            -- Check for the proper played hand
+            if context.scoring_name == G.GAME.current_round.cube_hand then
+                -- Flip over played cards
+                for idx = 1, #context.scoring_hand do
+                    local percent = 1.15 - (idx - 0.999) / (#context.scoring_hand - 0.998) * 0.3
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.15,
+                        func = function()
+                            context.scoring_hand[idx]:flip()
+                            play_sound('card1', percent)
+                            context.scoring_hand[idx]:juice_up()
+                            return true
+                        end
+                    }))
+                end
+
+                -- Convert to stone
+                for idx = 1, #context.scoring_hand do
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.15,
+                        func = function()
+                            context.scoring_hand[idx]:set_ability(G.P_CENTERS.m_stone)
+                            return true
+                        end
+                    }))
+                end
+
+                -- Unflip cards
+                for idx = 1, #context.scoring_hand do
+                    local percent = 0.85 + (idx - 0.999) / (#context.scoring_hand - 0.998) * 0.3
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.15,
+                        func = function()
+                            context.scoring_hand[idx]:flip()
+                            play_sound('tarot2', percent, 0.6)
+                            context.scoring_hand[idx]:juice_up()
+                            return true
+                        end
+                    }))
+                end
+            end
+        end
+    end
 }

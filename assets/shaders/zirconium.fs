@@ -26,12 +26,17 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     // Position of a pixel within the sprite
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
+    // Map the premade texture onto the card
     vec4 lazy_texture = Texel(z_text, uv);
     lazy_texture.a = lazy_texture.a * 0.45;
 
-    lazy_texture.r = lazy_texture.r * 0.98;
-    lazy_texture.g = lazy_texture.g * 1.2 + (0.001 * zirconium.x);
-    lazy_texture.b = lazy_texture.b * 1.5 + (0.01 * zirconium.y);
+    // Don't ask, I don't know either
+    lazy_texture.r = lazy_texture.r * 0.85;
+    lazy_texture.g = lazy_texture.g * 1.3 + (0.001 * zirconium.x);
+    lazy_texture.b = lazy_texture.b * 1.7 + (0.015 * zirconium.y);
+
+    // Saturate the image, probably
+    lazy_texture = lazy_texture * 1.25;
 
     if (tex.a < 0.1) {
         lazy_texture.a = 0.0;
@@ -41,6 +46,9 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     return dissolve_mask(lazy_texture*colour, texture_coords, uv);
 }
 
+// Negative shader shit I think??
+// God why did I not comment any of this shit I'm such a fucking moron
+// I do not remember how ANY of his shit works
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
 {
     if (dissolve < 0.001) {

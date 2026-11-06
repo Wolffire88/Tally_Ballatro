@@ -1,0 +1,28 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+# Add TB.JOKERVALS to the save_run function
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "VERSION = G.VERSION"
+position = "at"
+payload = '''VERSION = G.VERSION,
+TB_GLOBALS = TB.JOKERVALS
+'''
+match_indent = true
+
+# Recover TB.JOKERVALS upon loading a new save_run
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "G.RESET_BLIND_STATES = true"
+position = "after"
+payload = '''
+
+if saveTable then
+    TB.JOKERVALS = saveTable.TB_GLOBALS
+end
+'''
+match_indent = true

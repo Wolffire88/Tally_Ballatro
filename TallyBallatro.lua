@@ -1,15 +1,3 @@
--- Removing Neco arc compatibality for now
---[[
-filename = ""
-local neco = next(SMODS.find_mod("JokersAsNecoArc"))
-if neco then
-    filename = "NecoHall"
-else
-    filename = "THJokers"
-end
-]]--
-filename = "THJokers"
-
 -- Atlases
 assert(SMODS.load_file("src/atlases.lua"))()
 

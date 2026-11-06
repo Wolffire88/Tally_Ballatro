@@ -1,10 +1,11 @@
+-- Joe Hawley (The Banished)
 SMODS.Joker {
     key = "hawley",
-    name = "The Singer",
+    name = "The Banished",
     config = { extra = { xmult = 1, xmult_increase = 1 } },
     pos = {
-        x = 3,
-        y = 3
+        x = 4,
+        y = 4
     },
     rarity = 4,
     cost = 20,
@@ -14,8 +15,8 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 4,
-        y = 3
+        x = 5,
+        y = 4
     },
     atlas = "tb_joker",
 
@@ -63,13 +64,14 @@ SMODS.Joker {
     end                
 }
 
+-- Andrew Horowitz (The Pianist)
 SMODS.Joker {
     key = "horowitz",
     name = "The Pianist",
     config = { extra = { create = 1, create_inc = 1, to_play = 30, played = 0, create_cap = 12 } },
     pos = {
-        x = 5,
-        y = 3
+        x = 6,
+        y = 4
     },
     rarity = 4,
     cost = 20,
@@ -79,8 +81,8 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 6,
-        y = 3
+        x = 7,
+        y = 4
     },
     atlas = "tb_joker", 
     
@@ -139,12 +141,13 @@ SMODS.Joker {
     end
 }
 
+-- Zubin Seghisi (The Bassist)
 SMODS.Joker {
     key = "seghisi",
     name = "The Bassist",
     config = { extra = { tags = 1, tag_increase = 1, to_skip = 3, skips = 0 } },
     pos = {
-        x = 1,
+        x = 8,
         y = 4
     },
     rarity = 4,
@@ -155,7 +158,7 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 2,
+        x = 9,
         y = 4
     },
     atlas = "tb_joker",
@@ -210,13 +213,14 @@ SMODS.Joker {
     end
 }
 
+-- Ross Federman (The Drummer)
 SMODS.Joker {
     key = "federman",
     name = "The Drummer",
     config = {},
     pos = {
-        x = 3,
-        y = 4
+        x = 0,
+        y = 5
     },
     rarity = 4,
     cost = 20,
@@ -226,8 +230,8 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 4,
-        y = 4
+        x = 1,
+        y = 5
     },
     atlas = "tb_joker",
     
@@ -290,13 +294,14 @@ SMODS.Joker {
     end
 }
 
+-- Rob Cantor (The Guitarist)
 SMODS.Joker {
     key = "cantor",
     name = "The Guitarist",
     config = { extra = { xmult = 1, xmult_increase = 0.5 } },
     pos = {
-        x = 5,
-        y = 4
+        x = 2,
+        y = 5
     },
     rarity = 4,
     cost = 20,
@@ -306,8 +311,8 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 6,
-        y = 4
+        x = 3,
+        y = 5
     },
     atlas = "tb_joker",
     
@@ -338,13 +343,14 @@ SMODS.Joker {
     end
 }
 
+-- Bora Karaca (The Performer)
 SMODS.Joker {
     key = "karaca",
     name = "The Performer",
     config = { extra = { xmult = 1, xmult_increase = 0.34 } },
     pos = {
-        x = 0,
-        y = 2
+        x = 4,
+        y = 5
     },
     rarity = 4,
     cost = 20,
@@ -354,10 +360,10 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 1,
-        y = 2
+        x = 5,
+        y = 5
     },
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult_increase, card.ability.extra.xmult } }
@@ -381,13 +387,14 @@ SMODS.Joker {
     end
 }
 
+-- Casey Shea (The Singer)
 SMODS.Joker {
     key = "shea",
-    name = "The Stand In",
+    name = "The Singer",
     config = { extra = { rounds_left = 2, odds = 3 } },
     pos = {
-        x = 2,
-        y = 2
+        x = 6,
+        y = 5
     },
     rarity = 4,
     cost = 20,
@@ -397,10 +404,10 @@ SMODS.Joker {
     discovered = false,
     effect = nil,
     soul_pos = {
-        x = 3,
-        y = 2
+        x = 7,
+        y = 5
     },
-    atlas = "tb_joker_2",
+    atlas = "tb_joker",
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.rounds_left, (G.GAME and G.GAME.probabilities.normal or 1), card.ability.extra.odds } }
@@ -451,6 +458,61 @@ SMODS.Joker {
                     end
                 }))
             end
+        end
+    end
+}
+
+-- Matthew Altruda (The Host)
+SMODS.Joker {
+    key = "altruda",
+    name = "The Host",
+    config = { extra = { xcoin = 1.05, loc_dollar = 0 }},
+    pos = {
+        x = 8,
+        y = 5
+    },
+    rarity = 4,
+    cost = 20,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    effect = nil,
+    soul_pos = {
+        x = 9,
+        y = 5
+    },
+    atlas = "tb_joker",
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.xcoin } }
+    end,
+
+    calculate = function(self, card, context)
+        if card.debuff then return nil end
+
+        if context.before then
+            card.ability.extra.loc_dollar = G.GAME.dollars
+        end
+
+        if context.cardarea == G.play and context.individual and context.other_card:is_face() then
+            local dollar_scale = math.floor(card.ability.extra.loc_dollar * card.ability.extra.xcoin - card.ability.extra.loc_dollar)
+            card.ability.extra.loc_dollar = card.ability.extra.loc_dollar + dollar_scale
+            return {
+                message = localize{type='variable', key='a_xcoin', vars = {card.ability.extra.xcoin}},
+                colour = G.C.GOLD,
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        trigger = "after",
+                        delay = 0.05,
+                        func = function()
+                            card:juice_up()
+                            ease_dollars(dollar_scale, true)
+                            return true
+                        end
+                    }))
+                end
+            }
         end
     end
 }

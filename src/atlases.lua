@@ -1,13 +1,6 @@
 SMODS.Atlas {
     key = "tb_joker",
-    path = filename..".png",
-    px = 71,
-    py = 95
-}
-
-SMODS.Atlas {
-    key = "tb_joker_2",
-    path = filename.."_2.png",
+    path = "tally_jokers.png",
     px = 71,
     py = 95
 }
